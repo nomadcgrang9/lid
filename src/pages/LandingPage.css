@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 60px);
+  margin: -32px -40px;
   padding: 38px 19px;
   background-color: var(--background-color);
 }
@@ -227,6 +228,7 @@
 /* 반응형 - 모바일 (768px 이하) - 카드형 레이아웃 */
 @media (max-width: 768px) {
   .landing-page {
+    margin: -20px -16px;
     padding: 16px;
     min-height: auto;
     align-items: flex-start;
