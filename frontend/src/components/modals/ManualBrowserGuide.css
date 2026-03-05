@@ -1,0 +1,98 @@
+.manual-guide-modal {
+  text-align: center;
+}
+
+.modal-description {
+  font-size: 0.95rem;
+  color: #718096;
+  line-height: 1.6;
+  margin: 0 0 32px;
+}
+
+.guide-section {
+  background-color: #f7fafc;
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin-bottom: 24px;
+}
+
+.guide-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 20px;
+}
+
+.guide-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guide-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.step-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  flex: 1;
+}
+
+.step-icon {
+  color: #3B82F6;
+  flex-shrink: 0;
+}
+
+.step-content span {
+  font-size: 0.9rem;
+  color: #2d3748;
+  line-height: 1.4;
+}
+
+/* 모바일 대응 */
+@media (max-width: 480px) {
+  .guide-section {
+    padding: 20px 16px;
+  }
+
+  .guide-step {
+    padding: 14px;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+
+  .step-content span {
+    font-size: 0.85rem;
+  }
+}

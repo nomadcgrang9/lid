@@ -1,0 +1,287 @@
+.landing-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  padding: 38px 19px;
+  background-color: var(--background-color);
+}
+
+.landing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 520px;
+  width: 100%;
+}
+
+/* 이미지 영역 */
+.landing-image-wrapper {
+  width: 100%;
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+.landing-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 텍스트 영역 */
+.landing-text {
+  text-align: left;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.landing-line {
+  font-size: 1.21rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+}
+
+/* 버튼 영역 */
+.landing-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.landing-btn {
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.account-btn {
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.account-btn:hover {
+  background-color: var(--border-color);
+}
+
+.zoom-btn {
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.zoom-btn:hover {
+  background-color: var(--border-color);
+}
+
+.donation-btn {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.donation-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* 모달 오버레이 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 계좌 모달 */
+.account-modal {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 360px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.account-info {
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.account-bank {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.account-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: 0.05em;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.copy-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.copy-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.close-btn {
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.close-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* 로딩 상태 */
+.landing-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+  color: var(--primary-color);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 반응형 - 모바일 (768px 이하) - 카드형 레이아웃 */
+@media (max-width: 768px) {
+  .landing-page {
+    padding: 16px;
+    min-height: auto;
+    align-items: flex-start;
+  }
+
+  .landing-content {
+    max-width: 100%;
+  }
+
+  .landing-image-wrapper {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .landing-text {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .landing-line {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+  }
+
+  .landing-buttons {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .landing-btn {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+/* 반응형 - 매우 작은 화면 (480px 이하) */
+@media (max-width: 480px) {
+  .landing-page {
+    padding: 12px;
+  }
+
+  .landing-content {
+    padding: 16px;
+  }
+
+  .landing-line {
+    font-size: 0.95rem;
+  }
+
+  .landing-buttons {
+    flex-direction: column;
+  }
+
+  .landing-btn {
+    width: 100%;
+  }
+}

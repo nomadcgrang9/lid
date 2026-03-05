@@ -1,0 +1,693 @@
+.members-page {
+  max-width: 1200px;
+}
+
+/* 인증 화면 */
+.auth-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.auth-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: white;
+}
+
+.auth-container h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.auth-container p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-input {
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.auth-error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+}
+
+.auth-hint {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* 메인 페이지 */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  min-width: 280px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.search-box svg {
+  color: var(--text-secondary);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.btn-browse {
+  padding: 10px 16px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-browse:hover {
+  background: #E5E7EB;
+}
+
+.btn-cancel {
+  background: #F3F4F6;
+  color: var(--text-secondary);
+}
+
+.btn-cancel:hover {
+  background: #E5E7EB;
+}
+
+/* 엑셀 업로드 폼 */
+.excel-upload-form {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px dashed var(--primary-color);
+}
+
+.excel-upload-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.excel-upload-header svg {
+  color: var(--primary-color);
+}
+
+.excel-upload-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.excel-upload-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.template-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid var(--primary-color);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.template-download-btn:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.excel-upload-input {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.file-select-box {
+  flex: 1;
+  padding: 12px 16px;
+  background: #F8FAFC;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.file-select-box:hover {
+  border-color: var(--primary-color);
+}
+
+.file-select-box.dragging {
+  border-color: var(--primary-color);
+  border-style: dashed;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.file-name {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.file-placeholder {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.excel-upload-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* 통계 카드 */
+.stats-cards {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card svg {
+  color: var(--primary-color);
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* 테이블 */
+.members-table-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.members-table th {
+  background: #F3F4F6;
+  color: var(--text-primary);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.members-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.member-row:hover {
+  background: var(--surface-color);
+}
+
+.center {
+  text-align: center;
+}
+
+.name-cell {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+  color: var(--primary-dark);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.actions-cell {
+  vertical-align: middle;
+}
+
+.actions-inner {
+  display: flex;
+  gap: 8px;
+}
+
+.toggle-col {
+  width: 36px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.toggle-table {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.toggle-table:hover {
+  background: #E5E7EB;
+}
+
+.icon-btn {
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn.edit {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.icon-btn.edit:hover {
+  background: #BAE6FD;
+}
+
+.icon-btn.delete {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.icon-btn.delete:hover {
+  background: #FECACA;
+}
+
+.icon-btn.save {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.icon-btn.save:hover {
+  background: #A7F3D0;
+}
+
+.icon-btn.cancel {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.icon-btn.cancel:hover {
+  background: #E5E7EB;
+}
+
+/* 입력 행 */
+.adding-row td,
+.editing-row td {
+  background: #F0F9FF;
+}
+
+.table-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.table-input.small {
+  width: 70px;
+}
+
+.table-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.region-school-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.region-school-input span {
+  color: var(--text-secondary);
+}
+
+/* 빈 상태 */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+}
+
+/* 로딩 상태 */
+.loading-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.loading-overlay svg {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 반응형 - 모바일 (768px 이하) */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .search-box {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .header-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 통계 카드 */
+  .stats-cards {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px 20px;
+  }
+
+  /* 엑셀 업로드 폼 */
+  .excel-upload-form {
+    padding: 16px;
+  }
+
+  .excel-upload-desc {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .excel-upload-input {
+    flex-direction: column;
+  }
+
+  .file-select-box {
+    width: 100%;
+  }
+
+  .excel-upload-actions {
+    flex-direction: column;
+  }
+
+  .excel-upload-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 테이블을 컴팩트 리스트로 변환 */
+  .members-table-wrapper {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .members-table {
+    display: block;
+  }
+
+  .members-table thead {
+    display: none;
+  }
+
+  .members-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .members-table tr.member-row,
+  .members-table tr.adding-row,
+  .members-table tr.editing-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    gap: 8px;
+  }
+
+  .members-table tr td {
+    padding: 0;
+    border: none;
+  }
+
+  /* 번호 숨기기 */
+  .members-table tr td.center {
+    display: none;
+  }
+
+  /* 이름 - 강조 */
+  .members-table tr.member-row td.name-cell {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    flex: 0 0 auto;
+    margin-right: 8px;
+  }
+
+  /* 전화번호 - 이름 옆에 */
+  .members-table tr.member-row td:nth-child(4) {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  /* 지역/학교 - 아래 줄 */
+  .members-table tr.member-row td:nth-child(3) {
+    flex: 0 0 100%;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    order: 3;
+  }
+
+  .members-table tr.member-row td:nth-child(3)::before {
+    content: '📍 ';
+  }
+
+  /* 역할 배지 - 이름 줄에 */
+  .members-table tr.member-row td:nth-child(5) {
+    flex: 0 0 auto;
+    order: 1;
+  }
+
+  .members-table tr.member-row td:nth-child(5) .role-badge {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+  }
+
+  /* 관리 버튼 */
+  .members-table tr.member-row td.actions-cell {
+    flex: 0 0 auto;
+    margin-left: auto;
+    order: 2;
+  }
+
+  /* 추가/수정 행 - 세로 스택 */
+  .members-table tr.adding-row,
+  .members-table tr.editing-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .members-table tr.adding-row td,
+  .members-table tr.editing-row td {
+    width: 100%;
+  }
+
+  .members-table tr.adding-row td.center,
+  .members-table tr.editing-row td.center {
+    display: none;
+  }
+
+  .members-table tr.adding-row .region-school-input,
+  .members-table tr.editing-row .region-school-input {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .members-table tr.adding-row .region-school-input span,
+  .members-table tr.editing-row .region-school-input span {
+    display: none;
+  }
+
+  .members-table tr.adding-row .table-input.small,
+  .members-table tr.editing-row .table-input.small {
+    width: 100%;
+  }
+
+  .members-table tr.adding-row td.actions-cell,
+  .members-table tr.editing-row td.actions-cell {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .members-table tr.adding-row .actions-inner,
+  .members-table tr.editing-row .actions-inner {
+    justify-content: flex-end;
+  }
+}

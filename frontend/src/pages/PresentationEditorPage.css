@@ -1,0 +1,400 @@
+.editor-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 에디터 헤더 */
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: #F9FAFB;
+  border-color: var(--primary-color);
+}
+
+.editor-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.save-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-btn:hover {
+  background: #5b8fd9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3);
+}
+
+/* 슬라이드 그리드 */
+.slides-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* 슬라이드 카드 */
+.slide-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.slide-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.slide-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.slide-number {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.edit-slide-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-slide-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* 슬라이드 미리보기 */
+.slide-preview {
+  padding: 40px 30px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FAFAFA;
+}
+
+.slide-content {
+  width: 100%;
+  text-align: center;
+}
+
+/* 타이틀 슬라이드 */
+.title-slide .slide-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.title-slide .slide-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.title-slide .slide-author {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* 컨텐츠 슬라이드 */
+.content-slide .slide-content-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.keypoints-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.keypoints-list li {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-left: 24px;
+  position: relative;
+}
+
+.keypoints-list li:before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+/* 질문 슬라이드 */
+.question-slide .slide-question-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.questions-list {
+  text-align: left;
+}
+
+.question-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.question-number {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.question-text {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 마무리 슬라이드 */
+.closing-slide .slide-closing-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.closing-slide .slide-closing-message {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 편집 입력 필드 */
+.edit-input,
+.edit-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.title-input {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.subtitle-input,
+.author-input {
+  font-size: 1rem;
+}
+
+.content-title-input,
+.question-title-input,
+.closing-title-input {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.edit-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 키포인트 편집 */
+.keypoints-edit,
+.questions-edit {
+  text-align: left;
+}
+
+.keypoint-edit-row,
+.question-edit-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.keypoint-input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.question-textarea {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.delete-keypoint-btn,
+.delete-question-btn {
+  padding: 8px;
+  background: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  border-radius: 4px;
+  color: #DC2626;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.delete-keypoint-btn:hover,
+.delete-question-btn:hover {
+  background: #DC2626;
+  color: white;
+}
+
+.add-keypoint-btn,
+.add-question-btn {
+  width: 100%;
+  padding: 10px;
+  background: #F3F4F6;
+  border: 1px dashed #D1D5DB;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.add-keypoint-btn:hover,
+.add-question-btn:hover {
+  background: #E5E7EB;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* 로딩 */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--text-secondary);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .editor-page {
+    padding: 16px;
+  }
+
+  .editor-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .editor-title {
+    text-align: left;
+    font-size: 1.25rem;
+  }
+
+  .editor-actions {
+    justify-content: flex-end;
+  }
+
+  .slides-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .slide-preview {
+    padding: 30px 20px;
+    min-height: 300px;
+  }
+
+  .title-slide .slide-title {
+    font-size: 1.5rem;
+  }
+
+  .content-slide .slide-content-title,
+  .question-slide .slide-question-title {
+    font-size: 1.25rem;
+  }
+
+  .keypoints-list li {
+    font-size: 1rem;
+  }
+
+  .question-text {
+    font-size: 0.95rem;
+  }
+}

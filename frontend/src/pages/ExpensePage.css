@@ -1,0 +1,1138 @@
+.expense-page {
+  max-width: 1400px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.year-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 4px 12px 4px 4px;
+  transition: all 0.2s;
+}
+
+.year-input-wrapper:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.year-input {
+  width: 70px;
+  padding: 4px 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  background: transparent;
+  -moz-appearance: textfield;
+}
+
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.year-input:focus {
+  outline: none;
+}
+
+.year-suffix {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* 예산 항목별 카드 - 3열 그리드 */
+.budget-categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.budget-category-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-top: 3px solid var(--primary-color);
+}
+
+/* 빈 슬롯 (예산 추가) 카드 */
+.budget-slot-empty {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px dashed var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.budget-slot-empty:hover {
+  border-color: var(--primary-color);
+  background: rgba(59, 130, 246, 0.02);
+}
+
+.budget-slot-empty .slot-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.budget-slot-empty:hover .slot-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary-color);
+}
+
+.budget-slot-empty .slot-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.budget-slot-empty:hover .slot-text {
+  color: var(--primary-color);
+}
+
+.budget-category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.budget-category-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.budget-edit-btn {
+  padding: 4px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.budget-edit-btn:hover {
+  background: var(--surface-color);
+  color: var(--primary-color);
+}
+
+.budget-amounts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.budget-amount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budget-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.budget-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.budget-value.used {
+  color: #F59E0B;
+}
+
+.budget-value.remaining {
+  color: #22C55E;
+}
+
+.budget-value.negative {
+  color: #DC2626;
+}
+
+.budget-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #E5E7EB;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.warning {
+  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+}
+
+.progress-fill.over {
+  background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* 예산 수정 폼 */
+.budget-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.budget-input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.budget-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.budget-edit-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* 테이블 */
+.expense-table-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expense-table th {
+  background: #F3F4F6;
+  color: var(--text-primary);
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.expense-table td {
+  padding: 12px;
+  font-size: 0.85rem;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+.expense-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.expense-row {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.expense-row:hover {
+  background: var(--surface-color);
+}
+
+.attendees-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 200px;
+}
+
+.attendees-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.receipt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 5px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 3px;
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.expand-icon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.amount {
+  font-weight: 600;
+  text-align: right;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.icon-btn {
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn.edit {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.icon-btn.edit:hover {
+  background: #BAE6FD;
+}
+
+.icon-btn.delete {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.icon-btn.delete:hover {
+  background: #FECACA;
+}
+
+.icon-btn.save {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.icon-btn.save:hover {
+  background: #A7F3D0;
+}
+
+.icon-btn.cancel {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.icon-btn.cancel:hover {
+  background: #E5E7EB;
+}
+
+/* 확장 영역 */
+.expanded-row td {
+  background: #F8FAFC;
+  padding: 0 !important;
+}
+
+.expanded-content {
+  padding: 16px 20px;
+}
+
+.attachments-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  background: white;
+  border-radius: 10px;
+  padding: 16px 20px;
+  border: 1px solid var(--border-color);
+}
+
+.attachment-group {
+  flex: 1;
+}
+
+.attachment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.attachment-header svg {
+  color: var(--primary-color);
+}
+
+.attachment-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.attachment-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #F8FAFC;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.attachment-item svg {
+  color: var(--text-secondary);
+}
+
+.attachment-name {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+}
+
+.attachment-btn {
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.attachment-btn.view {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.attachment-btn.view:hover {
+  background: #BAE6FD;
+}
+
+.no-attachment {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.attachment-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: white;
+  border: 1px dashed var(--primary-color);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.attachment-add-btn:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.attachment-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--border-color);
+  flex-shrink: 0;
+}
+
+/* 입력 행 */
+.adding-row td,
+.editing-row td {
+  background: #F0F9FF;
+}
+
+.table-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+.table-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* 빈 상태 */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* 영수증 배지 (테이블 행) */
+.receipt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: #FEF3C7;
+  color: #92400E;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+/* 확장 행 - 조회용 */
+.expanded-receipts {
+  padding: 12px 0;
+}
+
+.expanded-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.expanded-section-header svg {
+  color: var(--primary-color);
+}
+
+.receipt-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.receipt-thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid var(--border-color);
+  transition: all 0.2s;
+}
+
+.receipt-thumbnail:hover {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.receipt-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 모달 오버레이 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* 지출 내역 모달 */
+.expense-modal {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* 예산 추가 모달 */
+.budget-modal {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.budget-modal .modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modal-close-btn {
+  padding: 8px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: var(--surface-color);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 영수증 섹션 */
+.receipt-section {
+  background: #F8FAFC;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.receipt-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.receipt-section-header svg {
+  color: var(--primary-color);
+}
+
+.receipt-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.receipt-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.receipt-item:hover {
+  border-color: var(--primary-color);
+}
+
+.receipt-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.receipt-item.pending {
+  border-color: #22C55E;
+  border-style: dashed;
+}
+
+.receipt-remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.receipt-item:hover .receipt-remove-btn {
+  opacity: 1;
+}
+
+.receipt-pending-badge {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  padding: 2px 6px;
+  background: rgba(34, 197, 94, 0.9);
+  color: white;
+  font-size: 0.7rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.receipt-add-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  border: 2px dashed var(--primary-color);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: all 0.2s;
+}
+
+.receipt-add-btn:hover {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: var(--primary-dark);
+}
+
+.receipt-add-btn span {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.receipt-hint {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  background: #F8FAFC;
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-color);
+}
+
+/* 이미지 뷰어 */
+.image-viewer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 40px;
+}
+
+.image-viewer-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.image-viewer-content img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.image-viewer-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  padding: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.image-viewer-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 로딩 오버레이 */
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px;
+  color: var(--text-secondary);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-modal {
+    max-height: 95vh;
+    margin: 10px;
+  }
+
+  .receipt-item,
+  .receipt-add-btn {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* 예산 카드 1열 레이아웃 */
+  .budget-categories {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .budget-category-card {
+    padding: 16px;
+  }
+
+  .budget-slot-empty {
+    min-height: 120px;
+  }
+
+  /* 테이블을 카드형 리스트로 변환 */
+  .expense-table-wrapper {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .expense-table {
+    display: block;
+  }
+
+  .expense-table thead {
+    display: none;
+  }
+
+  .expense-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .expense-table tr.expense-row {
+    display: block;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .expense-table tr.expense-row td {
+    display: block;
+    padding: 0;
+    border: none;
+  }
+
+  /* 모임일, 장소를 상단에 */
+  .expense-table tr.expense-row td:first-child {
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+  }
+
+  .expense-table tr.expense-row td:first-child::before {
+    content: '📅 ';
+  }
+
+  .expense-table tr.expense-row td:nth-child(2) {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .expense-table tr.expense-row td:nth-child(2)::before {
+    content: '📍 ';
+  }
+
+  /* 참석자 영역 */
+  .expense-table tr.expense-row td.attendees-cell {
+    margin-bottom: 12px;
+  }
+
+  .expense-table tr.expense-row td.attendees-cell::before {
+    content: '참석: ';
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .expense-table tr.expense-row td.attendees-cell .attendees-text {
+    white-space: normal;
+  }
+
+  /* 금액 정보 그리드 */
+  .expense-table tr.expense-row td.amount {
+    display: inline-block;
+    font-size: 0.9rem;
+    margin-right: 12px;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+
+  .expense-table tr.expense-row td:nth-child(4)::before {
+    content: '사용: ';
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .expense-table tr.expense-row td:nth-child(5) {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-right: 12px;
+    margin-bottom: 8px;
+  }
+
+  .expense-table tr.expense-row td:nth-child(5)::before {
+    content: '항목: ';
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .expense-table tr.expense-row td:nth-child(6)::before {
+    content: '개인부담: ';
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .expense-table tr.expense-row td:nth-child(7)::before {
+    content: '인당: ';
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  /* 관리 버튼 */
+  .expense-table tr.expense-row td.actions-cell {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* 확장 행 (모바일) */
+  .expense-table tr.expanded-row {
+    display: block;
+    background: white;
+    border-radius: 0 0 12px 12px;
+    margin-top: -12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .expense-table tr.expanded-row td {
+    display: block;
+    padding: 0;
+    border: none;
+  }
+
+  .expense-table tr.expanded-row .expanded-content {
+    padding: 0 16px 16px;
+  }
+
+  .receipt-thumbnails {
+    gap: 8px;
+  }
+
+  .receipt-thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,150 @@
+.ios-guide-modal {
+  max-width: 450px;
+}
+
+.clipboard-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.clipboard-status.success {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.clipboard-status.fail {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde047;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.copy-url-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-url-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+}
+
+.copy-url-button:active {
+  transform: translateY(0);
+}
+
+.current-url {
+  font-size: 0.75rem;
+  color: #78350f;
+  background-color: #fef9c3;
+  padding: 8px 12px;
+  border-radius: 6px;
+  word-break: break-all;
+  max-width: 100%;
+}
+
+.ios-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ios-step {
+  background-color: #f7fafc;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.ios-step:hover {
+  background-color: #edf2f7;
+  transform: translateY(-2px);
+}
+
+.step-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.step-icon-large {
+  color: #3B82F6;
+}
+
+.step-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.step-description {
+  font-size: 0.85rem;
+  color: #2d3748;
+  line-height: 1.5;
+}
+
+/* 모바일 대응 */
+@media (max-width: 480px) {
+  .ios-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .ios-step {
+    padding: 18px 14px;
+  }
+
+  .step-description {
+    font-size: 0.8rem;
+  }
+
+  .clipboard-status {
+    font-size: 0.85rem;
+    padding: 14px;
+  }
+
+  .current-url {
+    font-size: 0.7rem;
+  }
+}
+
+/* 아주 작은 화면 */
+@media (max-width: 360px) {
+  .ios-steps {
+    gap: 12px;
+  }
+
+  .ios-step {
+    padding: 16px 12px;
+  }
+
+  .step-icon-large {
+    width: 20px;
+    height: 20px;
+  }
+
+  .step-description {
+    font-size: 0.75rem;
+  }
+}

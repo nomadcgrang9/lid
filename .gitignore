@@ -1,0 +1,29 @@
+
+# YoYo AI version control directory
+.yoyo/
+
+# Environment variables (API keys)
+.env
+functions/.env
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Firebase cache
+.firebase/
+
+# Logs
+*.log
+
+# Temp files
+nul
+hwpx-template/
+
+# Gemini
+.gemini/
+
+# Claude
+.claude/

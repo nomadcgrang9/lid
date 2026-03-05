@@ -1,0 +1,815 @@
+.schedule-page {
+  max-width: 1400px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.year-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 4px 12px 4px 4px;
+  transition: all 0.2s;
+}
+
+.year-input-wrapper:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.year-input {
+  width: 70px;
+  padding: 4px 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  background: transparent;
+  -moz-appearance: textfield;
+}
+
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.year-input:focus {
+  outline: none;
+}
+
+.year-suffix {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.schedule-table-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schedule-table th {
+  background: #F3F4F6;
+  color: var(--text-primary);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.schedule-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  vertical-align: top;
+  height: 60px;
+}
+
+.schedule-row {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.schedule-row:hover {
+  background: var(--surface-color);
+}
+
+.col-round { width: 60px; text-align: center; }
+.col-date { width: 100px; }
+.col-topic { min-width: 300px; }
+.col-presenter { width: 150px; }
+.col-recorder { width: 80px; }
+.col-actions { width: 100px; }
+
+/* 날짜 셀 - 줄바꿈 방지 */
+.date-cell {
+  white-space: nowrap;
+  width: 100px;
+}
+
+/* 기록자 셀 - 줄바꿈 방지 */
+.recorder-cell {
+  white-space: nowrap;
+  width: 80px;
+}
+
+/* 진행/발표 셀 - 한 줄 제한 */
+.presenter-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.center { text-align: center; }
+
+.topic-cell {
+  /* td에는 flex 적용하지 않음 - 테이블 셀 높이 계산 유지 */
+}
+
+.topic-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 100%;
+}
+
+.topic-text {
+  flex: 1;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expand-icon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn.edit {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.icon-btn.edit:hover {
+  background: #BAE6FD;
+}
+
+.icon-btn.delete {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.icon-btn.delete:hover {
+  background: #FECACA;
+}
+
+.icon-btn.save {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.icon-btn.save:hover {
+  background: #A7F3D0;
+}
+
+.icon-btn.cancel {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.icon-btn.cancel:hover {
+  background: #E5E7EB;
+}
+
+/* 모바일용 확장 내용 - 데스크톱에서 숨김 */
+.mobile-expanded-content {
+  display: none;
+}
+
+.expanded-row td {
+  background: #F8FAFC;
+  padding: 0 !important;
+}
+
+.expanded-content {
+  padding: 16px 24px;
+}
+
+.expanded-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+}
+
+.expanded-section {
+  margin-bottom: 16px;
+}
+
+.expanded-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.section-icon {
+  font-size: 1rem;
+}
+
+.section-title {
+  font-weight: 600;
+  color: var(--primary-dark);
+  font-size: 0.9rem;
+}
+
+.meeting-note {
+  padding: 12px 16px;
+  background: #F8FAFC;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  font-family: inherit;
+  color: var(--text-primary);
+  border-left: 3px solid var(--primary-color);
+}
+
+.attendees-section {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.attendees-list {
+  display: inline-block;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.adding-row td,
+.editing-row td {
+  background: #F0F9FF;
+}
+
+.table-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.table-input.small {
+  width: 60px;
+  text-align: center;
+}
+
+.table-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* 로딩 상태 */
+.loading-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px;
+  color: var(--text-secondary);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.no-content {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* 엑셀 버튼 그룹 */
+.excel-buttons {
+  display: flex;
+  gap: 8px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.excel-buttons.dragging {
+  outline: 2px dashed var(--primary-color);
+  outline-offset: 4px;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 8px;
+}
+
+.excel-buttons.dragging .btn-outline {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline {
+  background: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.btn-outline:hover {
+  background: var(--surface-color);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.modal-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: var(--surface-color);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.small {
+  flex: 0 0 80px;
+}
+
+/* 회차 입력 필드 - 데스크톱에서도 전체 너비 */
+.form-group.round {
+  flex: 1;
+  max-width: 100%;
+}
+
+/* 기록자 입력 필드 - 데스크톱에서도 전체 너비 */
+.form-group.recorder {
+  flex: 1;
+  max-width: 100%;
+}
+
+.form-group.full {
+  width: 100%;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  background: #F9FAFB;
+  border-radius: 0 0 16px 16px;
+  flex-shrink: 0;
+}
+
+.continuous-add-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.continuous-add-checkbox input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-cancel {
+  background: #F3F4F6;
+  color: var(--text-secondary);
+}
+
+.btn-cancel:hover {
+  background: #E5E7EB;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .excel-buttons {
+    order: 3;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-group.small,
+  .form-group.round,
+  .form-group.recorder {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    max-height: 85vh;
+    margin: 10px;
+  }
+
+  .modal-body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .continuous-add-checkbox {
+    order: 2;
+  }
+
+  .modal-actions {
+    order: 1;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  /* 테이블을 카드형 리스트로 변환 */
+  .schedule-table-wrapper {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .schedule-table {
+    display: block;
+  }
+
+  .schedule-table thead {
+    display: none;
+  }
+
+  .schedule-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .schedule-table tr.schedule-row {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .schedule-table tr.schedule-row td {
+    display: block;
+    padding: 0;
+    border: none;
+    height: auto;
+  }
+
+  /* 회차와 일자를 한 줄로 */
+  .schedule-table tr.schedule-row td.center {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .schedule-table tr.schedule-row td.center::before {
+    content: '제';
+  }
+
+  .schedule-table tr.schedule-row td.center::after {
+    content: '회';
+  }
+
+  .schedule-table tr.schedule-row td.date-cell {
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  .schedule-table tr.schedule-row td.date-cell::before {
+    content: '📅 ';
+  }
+
+  /* 주제 */
+  .schedule-table tr.schedule-row .topic-cell {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .schedule-table tr.schedule-row .topic-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    -webkit-line-clamp: 2;
+  }
+
+  /* 발표자/기록자 영역 */
+  .schedule-table tr.schedule-row td.presenter-cell,
+  .schedule-table tr.schedule-row td.recorder-cell {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-right: 16px;
+    margin-bottom: 8px;
+  }
+
+  .schedule-table tr.schedule-row td.presenter-cell::before {
+    content: '발표: ';
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .schedule-table tr.schedule-row td.recorder-cell::before {
+    content: '기록: ';
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  /* 관리 버튼 */
+  .schedule-table tr.schedule-row td.actions-cell {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* 모바일용 확장 내용 - 카드 내부에 표시 */
+  .schedule-table tr.schedule-row td.mobile-expanded-content {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+    order: 10;
+  }
+
+  .schedule-table tr.schedule-row td.mobile-expanded-content .expanded-card {
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--surface-color);
+  }
+
+  .schedule-table tr.schedule-row td.mobile-expanded-content .expanded-section {
+    margin-bottom: 12px;
+  }
+
+  .schedule-table tr.schedule-row td.mobile-expanded-content .expanded-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .schedule-table tr.schedule-row td.mobile-expanded-content .meeting-note {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+  }
+
+  /* 데스크톱용 확장 행 숨김 */
+  .schedule-table tr.expanded-row.desktop-only {
+    display: none;
+  }
+
+  .expanded-content {
+    padding: 0;
+  }
+
+  .expanded-card {
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--surface-color);
+  }
+
+  .expanded-section {
+    margin-bottom: 12px;
+  }
+
+  .meeting-note {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+  }
+
+  /* 버튼 텍스트 단어 중간 잘림 방지 */
+  .btn-outline {
+    word-break: keep-all;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 40px;
+  }
+
+  .excel-buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .excel-buttons .btn-outline {
+    flex: 1;
+    padding: 10px 12px;
+  }
+}

@@ -1,0 +1,803 @@
+/* FileUploadPage.css — Publication Progress Dashboard */
+
+/* ==================== Page Layout ==================== */
+
+.pub-page {
+  max-width: 860px;
+  padding-bottom: 60px;
+}
+
+.pub-loading {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ==================== Page Header ==================== */
+
+.pub-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  gap: 12px;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.pub-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ==================== Overall Progress ==================== */
+
+.pub-overall {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+
+.pub-overall-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pub-overall-count {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.pub-overall-done {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.pub-overall-sep {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.pub-overall-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.pub-part-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pub-part-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.pub-part-chip.chip-complete {
+  border-color: var(--success-color);
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.pub-part-chip-name {
+  font-weight: 500;
+}
+
+.pub-part-chip-pct {
+  font-weight: 700;
+}
+
+/* ==================== Part Section ==================== */
+
+.pub-part {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.pub-part.part-complete {
+  border-color: #86efac;
+}
+
+/* ==================== Part Header ==================== */
+
+.pub-part-header {
+  padding: 16px 20px;
+  background: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pub-part-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pub-part-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.pub-part-dot {
+  color: var(--border-color);
+}
+
+.pub-part-display {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.pub-part-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pub-part-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 36px;
+  white-space: nowrap;
+}
+
+.pub-part-count.count-complete {
+  color: var(--success-color);
+}
+
+.pub-progress-track {
+  flex: 1;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.pub-progress-fill {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.pub-progress-fill.fill-complete {
+  background: var(--success-color);
+}
+
+.pub-part-pct {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  min-width: 34px;
+  text-align: right;
+}
+
+.pub-complete-badge {
+  display: inline-block;
+  background: var(--success-color);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.03em;
+}
+
+/* Collapse toggle button */
+.pub-collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border-color);
+  background: var(--background-color);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.pub-collapse-btn:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Part inline edit */
+.pub-part-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pub-input-sm {
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  height: 30px;
+  min-width: 80px;
+}
+
+.pub-input-wide {
+  min-width: 200px;
+  flex: 1;
+}
+
+/* ==================== Topic Table ==================== */
+
+.pub-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pub-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.pub-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.pub-table td {
+  padding: 11px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pub-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pub-table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.03);
+}
+
+/* Column widths */
+.th-date { width: 64px; }
+.th-title { width: auto; }
+.th-person { width: 88px; }
+.th-status { width: 86px; }
+.th-actions { width: 60px; }
+
+.td-date {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.td-title {
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.td-person {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.td-status {
+  white-space: nowrap;
+}
+
+.td-actions {
+  white-space: nowrap;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* Row states */
+.tr-done .td-title {
+  color: var(--text-primary);
+}
+
+.tr-pending .td-person {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Status buttons */
+.pub-status-done,
+.pub-status-pending {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.pub-status-done {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.pub-status-done:hover {
+  background: #bbf7d0;
+}
+
+.pub-status-pending {
+  background: #eff6ff;
+  color: var(--primary-color);
+  border: 1px solid #bfdbfe;
+}
+
+.pub-status-pending:hover {
+  background: #dbeafe;
+}
+
+/* Icon buttons */
+.pub-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.pub-icon-btn:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+.pub-icon-btn.pub-icon-danger:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Add topic button */
+.pub-add-topic-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-top: 1px dashed var(--border-color);
+  transition: background 0.15s ease;
+}
+
+.pub-add-topic-btn:hover {
+  background: rgba(59, 130, 246, 0.04);
+}
+
+/* ==================== Buttons ==================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--surface-color);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--border-color);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 0.8rem;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.pub-btn-danger-text {
+  background: none;
+  border-color: transparent;
+  color: #dc2626;
+}
+
+.pub-btn-danger-text:hover:not(:disabled) {
+  background: #fee2e2;
+}
+
+/* ==================== Modals ==================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  padding: 16px;
+  animation: fadeIn 0.18s ease-out;
+}
+
+.modal-content {
+  background: var(--background-color);
+  width: 100%;
+  max-width: 460px;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: slideUp 0.25s ease-out;
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.modal-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pub-modal-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 4px 0 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.close-btn:hover {
+  background: var(--surface-color);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-footer {
+  padding: 14px 20px;
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-footer.space-between {
+  justify-content: space-between;
+}
+
+/* ==================== Forms ==================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.required {
+  color: var(--error-color);
+}
+
+.form-input {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--background-color);
+  transition: border-color 0.15s ease;
+  outline: none;
+  width: 100%;
+}
+
+.form-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.form-error {
+  font-size: 0.8rem;
+  color: var(--error-color);
+  margin: 0;
+}
+
+/* ==================== File Drop ==================== */
+
+.file-drop-area {
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--surface-color);
+}
+
+.file-drop-area:hover {
+  border-color: var(--primary-color);
+  background: rgba(59, 130, 246, 0.03);
+}
+
+.hidden-input {
+  display: none;
+}
+
+.drop-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.file-selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  word-break: break-all;
+  text-align: center;
+}
+
+.pub-reupload-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ==================== File Info Card ==================== */
+
+.file-info-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.file-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name-large {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+/* ==================== Animations ==================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==================== Mobile ==================== */
+
+@media (max-width: 640px) {
+  .pub-page-header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .page-title {
+    font-size: 1.2rem;
+  }
+
+  .pub-overall {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .pub-part-header {
+    padding: 14px 16px;
+  }
+
+  /* Convert table to card layout on mobile */
+  .pub-table thead {
+    display: none;
+  }
+
+  .pub-table tbody tr {
+    display: block;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+  }
+
+  .pub-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .pub-table td {
+    display: block;
+    padding: 2px 0;
+    border-bottom: none;
+  }
+
+  .td-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding-bottom: 6px;
+    padding-right: 80px;
+  }
+
+  .td-date,
+  .td-person {
+    display: inline;
+    font-size: 0.8rem;
+    margin-right: 8px;
+  }
+
+  .td-status {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+  }
+
+  .td-actions {
+    margin-top: 6px;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 12px;
+  }
+
+  .pub-part-edit-row {
+    flex-wrap: wrap;
+  }
+
+  .pub-input-wide {
+    min-width: 100%;
+  }
+}
