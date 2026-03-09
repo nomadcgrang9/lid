@@ -1,12 +1,13 @@
 .layout {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .header {
   background: var(--primary-gradient);
-  padding: 16px 40px;
+  padding: 12px 40px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -91,6 +92,7 @@
   display: flex;
   flex: 1;
   position: relative;
+  overflow: hidden;
 }
 
 .main-content {
@@ -98,6 +100,12 @@
   padding: 32px 40px;
   background-color: var(--surface-color);
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.main-content::-webkit-scrollbar {
+  display: none;
 }
 
 /* 모바일 오버레이 */

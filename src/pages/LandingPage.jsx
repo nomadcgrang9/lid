@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { X, Copy, Check, Loader2, Video } from 'lucide-react'
 import { getLandingSettings } from '../services/memberService'
+import { getAllSchedules } from '../services/scheduleService'
+import CalendarWidget from '../components/CalendarWidget'
 import './LandingPage.css'
 
 function LandingPage() {
@@ -19,10 +21,21 @@ function LandingPage() {
     zoomPassword: ''
   })
   const [showZoomModal, setShowZoomModal] = useState(false)
+  const [schedules, setSchedules] = useState([])
 
   useEffect(() => {
     loadSettings()
+    loadSchedules()
   }, [])
+
+  const loadSchedules = async () => {
+    try {
+      const data = await getAllSchedules()
+      setSchedules(data)
+    } catch (error) {
+      console.error('일정 로딩 오류:', error)
+    }
+  }
 
   const loadSettings = async () => {
     try {
@@ -61,40 +74,46 @@ function LandingPage() {
 
   return (
     <div className="landing-page">
-      <div className="landing-content">
-        <div className="landing-image-wrapper">
-          <img
-            src={settings.landingImageUrl || "/picture/lidmember.png"}
-            alt="제도혁신분과 구성원"
-            className="landing-image"
-          />
+      <div className="landing-two-col">
+        {/* 좌측: 소개 영역 */}
+        <div className="landing-content">
+          <div className="landing-image-wrapper">
+            <img
+              src={settings.landingImageUrl || "/picture/lidmember.png"}
+              alt="제도혁신분과 구성원"
+              className="landing-image"
+            />
+          </div>
+
+          <p className="landing-text-single">
+            {settings.introLine1} {settings.introLine2} {settings.introLine3}
+          </p>
+
+          <div className="landing-buttons">
+            <button
+              className="landing-btn account-btn"
+              onClick={() => setShowAccountModal(true)}
+            >
+              회비계좌
+            </button>
+            <button
+              className="landing-btn zoom-btn"
+              onClick={() => setShowZoomModal(true)}
+            >
+              줌 미팅주소
+            </button>
+            <button
+              className="landing-btn donation-btn"
+              onClick={handleDonation}
+            >
+              후원하기
+            </button>
+          </div>
         </div>
 
-        <div className="landing-text">
-          <p className="landing-line">{settings.introLine1}</p>
-          <p className="landing-line">{settings.introLine2}</p>
-          <p className="landing-line">{settings.introLine3}</p>
-        </div>
-
-        <div className="landing-buttons">
-          <button
-            className="landing-btn account-btn"
-            onClick={() => setShowAccountModal(true)}
-          >
-            회비계좌
-          </button>
-          <button
-            className="landing-btn zoom-btn"
-            onClick={() => setShowZoomModal(true)}
-          >
-            줌 미팅주소
-          </button>
-          <button
-            className="landing-btn donation-btn"
-            onClick={handleDonation}
-          >
-            후원하기
-          </button>
+        {/* 우측: 캘린더 영역 */}
+        <div className="landing-calendar">
+          <CalendarWidget schedules={schedules} />
         </div>
       </div>
 
