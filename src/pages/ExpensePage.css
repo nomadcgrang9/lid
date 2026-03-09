@@ -87,6 +87,17 @@
   transform: translateY(-1px);
 }
 
+.btn-outline {
+  background: white;
+  color: var(--primary-color, #3b82f6);
+  border: 1.5px solid var(--primary-color, #3b82f6);
+}
+
+.btn-outline:hover {
+  background: rgba(59, 130, 246, 0.06);
+  transform: translateY(-1px);
+}
+
 /* 예산 항목별 카드 - 3열 그리드 */
 .budget-categories {
   display: grid;
@@ -415,6 +426,15 @@
 
 .icon-btn.cancel:hover {
   background: #E5E7EB;
+}
+
+.icon-btn.delete {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.icon-btn.delete:hover {
+  background: #FECACA;
 }
 
 /* 확장 영역 */

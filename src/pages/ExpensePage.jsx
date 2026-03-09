@@ -7,6 +7,7 @@ import {
   deleteExpense,
   addBudgetCategory,
   updateBudgetCategory,
+  deleteBudgetCategory,
   initializeDefaultBudgetCategories,
   addReceiptToExpense,
   removeReceiptFromExpense
@@ -319,6 +320,25 @@ function ExpensePage() {
     setBudgetFormData({ name: '', totalAmount: '' })
   }
 
+  const handleDeleteBudget = async (categoryId) => {
+    const used = getUsedAmount(categoryId)
+    const msg = used > 0
+      ? `이 예산에 연결된 사용 내역이 있습니다 (${used.toLocaleString()}원). 삭제하시겠습니까?`
+      : '이 예산 항목을 삭제하시겠습니까?'
+    if (!confirm(msg)) return
+
+    setIsSaving(true)
+    try {
+      await deleteBudgetCategory(categoryId)
+      await loadData(selectedYear)
+      setEditingBudgetId(null)
+    } catch (error) {
+      alert('예산 삭제 중 오류가 발생했습니다.')
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
   // 예산 추가 모달 열기
   const handleOpenBudgetModal = () => {
     setBudgetFormData({ name: '', totalAmount: '' })
@@ -386,6 +406,10 @@ function ExpensePage() {
             />
             <span className="year-suffix">년</span>
           </div>
+          <button className="btn btn-outline" onClick={handleOpenBudgetModal}>
+            <Plus size={18} />
+            예산 추가
+          </button>
           <button className="btn btn-primary" onClick={handleAdd}>
             <Plus size={18} />
             내역 추가
@@ -424,6 +448,9 @@ function ExpensePage() {
                     </button>
                     <button className="icon-btn cancel" onClick={handleCancelBudget} disabled={isSaving}>
                       <X size={14} />
+                    </button>
+                    <button className="icon-btn delete" onClick={() => handleDeleteBudget(category.id)} disabled={isSaving}>
+                      <Trash2 size={14} />
                     </button>
                   </div>
                 </div>
@@ -465,15 +492,6 @@ function ExpensePage() {
             </div>
           )
         })}
-        {/* 빈 슬롯 렌더링 - 최소 6개 슬롯 유지 */}
-        {Array.from({ length: Math.max(0, 6 - budgetCategories.length) }).map((_, index) => (
-          <div key={`empty-${index}`} className="budget-slot-empty" onClick={handleOpenBudgetModal}>
-            <div className="slot-icon">
-              <Plus size={24} />
-            </div>
-            <span className="slot-text">예산 추가</span>
-          </div>
-        ))}
       </div>
 
       <div className="expense-table-wrapper">
