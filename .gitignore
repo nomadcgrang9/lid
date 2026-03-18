@@ -43,3 +43,10 @@ hwpx-template/
 
 # Claude
 .claude/
+
+# Build logs and temp output
+build_log.txt
+build_output.txt
+build_debug.txt
+debug_utf8.txt
+deploy_status.txt
