@@ -117,26 +117,41 @@ async function extractPdfContent(pdfBase64, fileName) {
   }
 }
 
-// ==================== 글 생성 ====================
-exports.generateArticle = functions.region('asia-northeast3').https.onRequest((req, res) => {
+// ==================== 글 생성 (스트리밍) ====================
+exports.generateArticle = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).region('asia-northeast3').https.onRequest((req, res) => {
   return corsHandler(req, res, async (req, res) => {
     try {
       const { customTopic, cases, pdfContents, referenceContents, structuralProblems, alternatives, articleLength, customLengthMin, customLengthMax } = req.body
+
+      // SSE 헤더 설정
+      res.set('Content-Type', 'text/event-stream')
+      res.set('Cache-Control', 'no-cache')
+      res.set('Connection', 'keep-alive')
+
+      const sendEvent = (data) => {
+        res.write(`data: ${JSON.stringify(data)}\n\n`)
+      }
+
+      sendEvent({ type: 'progress', step: 'prompt', message: '프롬프트 준비 중...' })
 
       // Firestore에서 최신 AI 지침 불러오기
       const promptTemplate = await getAiPrompt()
 
       // 분량 지침 생성 (A4 1쪽 ≈ 1,000~1,200자 기준)
       let lengthInstruction = ''
+      let estimatedTotal = 10000
       switch (articleLength) {
         case 'pages_10_12':
           lengthInstruction = '반드시 총 10,000자~12,000자 이상(공백 포함, A4 10~12쪽 분량)으로, 각 섹션당 최소 2,500자 이상'
+          estimatedTotal = 11000
           break
         case 'pages_13_15':
           lengthInstruction = '반드시 총 13,000자~15,000자 이상(공백 포함, A4 13~15쪽 분량)으로, 각 섹션당 최소 3,200자 이상'
+          estimatedTotal = 14000
           break
         case 'pages_16_18':
           lengthInstruction = '반드시 총 16,000자~18,000자 이상(공백 포함, A4 16~18쪽 분량)으로, 각 섹션당 최소 4,000자 이상'
+          estimatedTotal = 17000
           break
         case 'custom': {
           const min = customLengthMin || 10
@@ -145,10 +160,12 @@ exports.generateArticle = functions.region('asia-northeast3').https.onRequest((r
           const charMax = max * 1000
           const perSection = Math.round(charMin / 4)
           lengthInstruction = `반드시 총 ${charMin}자~${charMax}자 이상(공백 포함, A4 ${min}~${max}쪽 분량)으로, 각 섹션당 최소 ${perSection}자 이상`
+          estimatedTotal = Math.round((charMin + charMax) / 2)
           break
         }
         default:
           lengthInstruction = '반드시 총 10,000자~12,000자 이상(공백 포함, A4 10~12쪽 분량)으로, 각 섹션당 최소 2,500자 이상'
+          estimatedTotal = 11000
       }
 
       // 태그 치환
@@ -161,18 +178,53 @@ exports.generateArticle = functions.region('asia-northeast3').https.onRequest((r
         .replace('[구조적문제점]', structuralProblems || '(작성자가 입력하지 않음 - AI가 분석하여 작성)')
         .replace('[대안제시]', alternatives || '(작성자가 입력하지 않음 - AI가 제안)')
 
-      const result = await model.generateContent(finalPrompt)
-      const responseText = result.response.text()
+      sendEvent({ type: 'progress', step: 'requesting', message: 'AI에 요청 전송 완료' })
 
-      const jsonMatch = responseText.match(/\{[\s\S]*\}/)
+      // 스트리밍으로 생성
+      const streamResult = await model.generateContentStream(finalPrompt)
+
+      let fullText = ''
+      let lastDetectedSection = 0
+
+      sendEvent({ type: 'progress', step: 'writing', message: '글 작성 시작...', section: 0, chars: 0, estimatedTotal })
+
+      for await (const chunk of streamResult.stream) {
+        const chunkText = chunk.text()
+        fullText += chunkText
+
+        // 섹션 감지 (JSON 내 "id": N 패턴으로 판별)
+        const sectionMatches = fullText.match(/"id"\s*:\s*(\d)/g)
+        const currentSection = sectionMatches ? sectionMatches.length : 0
+
+        if (currentSection > lastDetectedSection) {
+          lastDetectedSection = currentSection
+          sendEvent({ type: 'progress', step: 'writing', message: `${currentSection}단계 작성 중...`, section: currentSection, chars: fullText.length, estimatedTotal })
+        } else if (fullText.length % 500 < (fullText.length - chunkText.length) % 500 || chunkText.length > 200) {
+          // 약 500자마다 진행 업데이트
+          sendEvent({ type: 'progress', step: 'writing', message: `글 작성 중...`, section: lastDetectedSection, chars: fullText.length, estimatedTotal })
+        }
+      }
+
+      sendEvent({ type: 'progress', step: 'parsing', message: '결과 정리 중...' })
+
+      const jsonMatch = fullText.match(/\{[\s\S]*\}/)
       if (jsonMatch) {
-        res.json(JSON.parse(jsonMatch[0]))
+        const articleData = JSON.parse(jsonMatch[0])
+        sendEvent({ type: 'complete', data: articleData })
       } else {
         throw new Error('JSON 형식 파싱 실패')
       }
+
+      res.end()
     } catch (error) {
       console.error('글 생성 오류:', error)
-      res.status(500).json({ error: error.message })
+      try {
+        const sendError = (data) => { res.write(`data: ${JSON.stringify(data)}\n\n`) }
+        sendError({ type: 'error', error: error.message })
+        res.end()
+      } catch {
+        res.status(500).json({ error: error.message })
+      }
     }
   })
 })

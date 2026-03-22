@@ -3,11 +3,18 @@ import { ArrowLeft, ArrowRight, Save, RotateCcw, Send, Bot, User, Check, X, Load
 import { generateArticle as generateArticleAPI, refineArticle } from '../../services/geminiService'
 import './WriteSteps.css'
 
+const SECTION_LABELS = ['사례 제시', '관련 법령', '구조적 문제', '대안 제시']
+
 function StepGenerate({ formData, updateFormData, onNext, onPrev, onSaveDraft, isSaving }) {
   const [isGenerating, setIsGenerating] = useState(false)
   const [article, setArticle] = useState(formData.generatedArticle || null)
   const [editingSection, setEditingSection] = useState(null)
   const [editedContent, setEditedContent] = useState('')
+
+  // 진행 상태 추적
+  const [progress, setProgress] = useState({ step: '', message: '', section: 0, chars: 0, estimatedTotal: 10000 })
+  const [elapsedTime, setElapsedTime] = useState(0)
+  const timerRef = useRef(null)
 
   // AI 수정 요청 관련 상태
   const [chatMessages, setChatMessages] = useState([])
@@ -44,8 +51,18 @@ function StepGenerate({ formData, updateFormData, onNext, onPrev, onSaveDraft, i
 
   const generateArticle = async () => {
     setIsGenerating(true)
+    setElapsedTime(0)
+    setProgress({ step: '', message: '준비 중...', section: 0, chars: 0, estimatedTotal: 10000 })
+
+    // 경과 시간 타이머
+    timerRef.current = setInterval(() => {
+      setElapsedTime(prev => prev + 1)
+    }, 1000)
+
     try {
-      const generatedArticle = await generateArticleAPI(formData)
+      const generatedArticle = await generateArticleAPI(formData, (event) => {
+        setProgress(prev => ({ ...prev, ...event }))
+      })
       setArticle(generatedArticle)
       updateFormData({
         generatedArticle: generatedArticle,
@@ -55,6 +72,7 @@ function StepGenerate({ formData, updateFormData, onNext, onPrev, onSaveDraft, i
       console.error('글 생성 오류:', error)
       alert('글 생성 중 오류가 발생했습니다. 다시 시도해주세요.')
     } finally {
+      clearInterval(timerRef.current)
       setIsGenerating(false)
     }
   }
@@ -161,14 +179,67 @@ function StepGenerate({ formData, updateFormData, onNext, onPrev, onSaveDraft, i
   }
 
   if (isGenerating) {
+    const formatTime = (seconds) => {
+      const m = Math.floor(seconds / 60)
+      const s = seconds % 60
+      return m > 0 ? `${m}분 ${s}초` : `${s}초`
+    }
+
+    const progressPercent = progress.estimatedTotal > 0
+      ? Math.min(Math.round((progress.chars / progress.estimatedTotal) * 100), 95)
+      : 0
+
+    const steps = [
+      { key: 'extracting', label: '자료 분석' },
+      { key: 'prompt', label: '프롬프트 준비' },
+      { key: 'requesting', label: 'AI 요청 전송' },
+      { key: 'writing', label: '글 작성 중' },
+      { key: 'parsing', label: '결과 정리' },
+    ]
+
+    const currentStepIdx = steps.findIndex(s => s.key === progress.step)
+
     return (
       <div className="generating-state">
         <div className="generating-spinner">
           <Loader2 size={48} className="spinner-icon" />
         </div>
         <h3>글을 생성하고 있습니다...</h3>
-        <p>입력하신 내용을 바탕으로<br />4단 구조의 글을 작성 중입니다.</p>
-        <span className="generating-time">예상 소요 시간: 30초</span>
+
+        <div className="generating-steps">
+          {steps.map((s, idx) => {
+            let status = 'pending'
+            if (idx < currentStepIdx) status = 'done'
+            else if (idx === currentStepIdx) status = 'active'
+
+            return (
+              <div key={s.key} className={`generating-step ${status}`}>
+                <span className="gen-step-indicator">
+                  {status === 'done' ? '✓' : status === 'active' ? <Loader2 size={14} className="spinner-icon" /> : '○'}
+                </span>
+                <span className="step-label">{s.label}</span>
+              </div>
+            )
+          })}
+        </div>
+
+        {progress.step === 'writing' && (
+          <div className="generating-detail">
+            <div className="section-progress">
+              {SECTION_LABELS.map((label, idx) => (
+                <span key={idx} className={`section-badge ${idx + 1 <= progress.section ? 'done' : idx + 1 === progress.section + 1 && progress.section > 0 ? 'active' : ''}`}>
+                  {idx + 1}. {label}
+                </span>
+              ))}
+            </div>
+            <div className="progress-bar-container">
+              <div className="progress-bar-fill" style={{ width: `${progressPercent}%` }} />
+            </div>
+            <span className="progress-chars">{progress.chars.toLocaleString()}자 / 약 {progress.estimatedTotal.toLocaleString()}자</span>
+          </div>
+        )}
+
+        <span className="generating-time">⏱ 경과 시간: {formatTime(elapsedTime)}</span>
       </div>
     )
   }

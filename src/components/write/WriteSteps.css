@@ -124,7 +124,9 @@
 /* 생성 중 상태 */
 .generating-state {
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 20px;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 .generating-spinner {
@@ -143,7 +145,7 @@
 
 .generating-state h3 {
   font-size: 1.25rem;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   color: var(--text-primary);
 }
 
@@ -154,9 +156,107 @@
 
 .generating-time {
   display: inline-block;
-  margin-top: 16px;
-  font-size: 0.85rem;
+  margin-top: 20px;
+  font-size: 0.9rem;
   color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 단계별 진행 표시 */
+.generating-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  margin: 20px auto;
+  max-width: 260px;
+}
+
+.generating-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  opacity: 0.45;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.generating-step.active {
+  color: var(--primary-color);
+  font-weight: 600;
+  opacity: 1;
+}
+
+.generating-step.done {
+  color: #10b981;
+  opacity: 0.8;
+}
+
+.gen-step-indicator {
+  width: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* 작성 중 상세 진행 */
+.generating-detail {
+  margin: 20px auto;
+  max-width: 380px;
+  text-align: left;
+}
+
+.section-progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+  justify-content: center;
+}
+
+.section-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  background: var(--bg-secondary, #f3f4f6);
+  color: var(--text-secondary);
+  transition: all 0.3s;
+}
+
+.section-badge.done {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.section-badge.active {
+  background: #e0e7ff;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-secondary, #e5e7eb);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.progress-chars {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: block;
+  text-align: center;
 }
 
 /* Step 4: 글 생성 */

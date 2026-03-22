@@ -99,8 +99,8 @@ async function extractImageContent(imageFile) {
   }
 }
 
-// 4단 구조 글 생성
-export async function generateArticle(formData) {
+// 4단 구조 글 생성 (스트리밍)
+export async function generateArticle(formData, onProgress) {
   const { customTopic, cases, pdfFile, structuralProblems, alternatives, articleLength, customLengthMin, customLengthMax } = formData
 
   // PDF 내용 추출
@@ -108,6 +108,7 @@ export async function generateArticle(formData) {
   const pdfFilesToProcess = formData.pdfFiles || (pdfFile ? [pdfFile] : [])
 
   if (pdfFilesToProcess.length > 0) {
+    if (onProgress) onProgress({ type: 'progress', step: 'extracting', message: 'PDF 내용 추출 중...' })
     const contents = []
     for (let i = 0; i < pdfFilesToProcess.length; i++) {
       const file = pdfFilesToProcess[i]
@@ -122,6 +123,7 @@ export async function generateArticle(formData) {
   const referenceFilesToProcess = formData.referenceFiles || []
 
   if (referenceFilesToProcess.length > 0) {
+    if (onProgress) onProgress({ type: 'progress', step: 'extracting', message: '근거자료 분석 중...' })
     const contents = []
     for (let i = 0; i < referenceFilesToProcess.length; i++) {
       const file = referenceFilesToProcess[i]
@@ -130,19 +132,15 @@ export async function generateArticle(formData) {
       const fileExt = file.name.split('.').pop().toLowerCase()
 
       if (fileExt === 'pdf') {
-        // PDF 처리 (기존 extractPdfContent 함수 재사용)
         const content = await extractPdfContent(file)
         contents.push(`[문서: ${file.name}]\n${content}`)
       } else if (fileExt === 'txt') {
-        // TXT 파일 처리
         const content = await extractTextContent(file)
         contents.push(`[문서: ${file.name}]\n${content}`)
       } else if (['xlsx', 'xls', 'csv'].includes(fileExt)) {
-        // Excel/CSV 처리
         const content = await extractExcelContent(file)
         contents.push(`[문서: ${file.name}]\n${content}`)
       } else if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
-        // 이미지 처리
         const content = await extractImageContent(file)
         contents.push(`[이미지: ${file.name}]\n${content}`)
       }
@@ -168,11 +166,43 @@ export async function generateArticle(formData) {
     })
 
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.error || '글 생성 실패')
+      throw new Error('서버 응답 오류: ' + response.status)
     }
 
-    return await response.json()
+    // SSE 스트리밍 응답 처리
+    const reader = response.body.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
+    let result = null
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split('\n')
+      buffer = lines.pop() // 마지막 불완전한 라인은 버퍼에 유지
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          try {
+            const event = JSON.parse(line.slice(6))
+            if (event.type === 'complete') {
+              result = event.data
+            } else if (event.type === 'error') {
+              throw new Error(event.error)
+            } else if (event.type === 'progress' && onProgress) {
+              onProgress(event)
+            }
+          } catch (e) {
+            if (e.message && !e.message.includes('JSON')) throw e
+          }
+        }
+      }
+    }
+
+    if (!result) throw new Error('글 생성 결과를 받지 못했습니다.')
+    return result
   } catch (error) {
     console.error('글 생성 오류:', error)
     throw error
