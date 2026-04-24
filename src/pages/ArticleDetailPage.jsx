@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Download, Lock, Calendar, User, MessageSquare, ChevronDown, ChevronUp, Send, Loader2, Trash2, FileText } from 'lucide-react'
-import { getArticle, getComments, addComment, verifyPassword, deleteArticle } from '../services/articleService'
+import { ArrowLeft, Download, Lock, Save, X, Calendar, User, MessageSquare, ChevronDown, ChevronUp, Send, Loader2, Trash2, FileText } from 'lucide-react'
+import { getArticle, getComments, addComment, verifyPassword, deleteArticle, updateArticle } from '../services/articleService'
 import { downloadAsHwpx } from '../utils/hwpxExport'
 import './ArticleDetailPage.css'
 
@@ -14,12 +14,16 @@ function ArticleDetailPage() {
   const [showGuide, setShowGuide] = useState(false)
   const [showSummaryCard, setShowSummaryCard] = useState(false)
   const [showPasswordModal, setShowPasswordModal] = useState(false)
-  const [passwordAction, setPasswordAction] = useState('edit') // 'edit' or 'delete'
+  const [passwordAction, setPasswordAction] = useState('edit')
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [newComment, setNewComment] = useState({ author: '', content: '' })
   const [comments, setComments] = useState([])
   const [isSubmittingComment, setIsSubmittingComment] = useState(false)
+
+  const [isEditMode, setIsEditMode] = useState(false)
+  const [editedArticle, setEditedArticle] = useState(null)
+  const [isSavingEdit, setIsSavingEdit] = useState(false)
 
   useEffect(() => {
     loadArticle()
@@ -59,7 +63,7 @@ function ArticleDetailPage() {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit'
-    }).replace(/\. /g, '.').replace('.', '')
+    }).replace(/\. /g, '.').replace(/\.$/, '')
   }
 
   const handleEdit = () => {
@@ -101,9 +105,62 @@ function ArticleDetailPage() {
         alert('글 삭제에 실패했습니다.')
       }
     } else {
-      // 편집 기능은 추후 구현
-      alert('편집 기능은 준비 중입니다.')
+      setEditedArticle({
+        ...article,
+        sections: (article.sections || []).map(s => ({ ...s })),
+        questions: (article.questions || []).map(q => ({ ...q })),
+      })
+      setIsEditMode(true)
     }
+  }
+
+  const updateSectionField = (sectionId, field, value) => {
+    setEditedArticle(prev => ({
+      ...prev,
+      sections: prev.sections.map(s =>
+        s.id === sectionId ? { ...s, [field]: value } : s
+      )
+    }))
+  }
+
+  const updateQuestionText = (questionId, value) => {
+    setEditedArticle(prev => ({
+      ...prev,
+      questions: prev.questions.map(q =>
+        q.id === questionId ? { ...q, text: value } : q
+      )
+    }))
+  }
+
+  const handleSaveEdit = async () => {
+    setIsSavingEdit(true)
+    try {
+      await updateArticle(id, {
+        title: editedArticle.title,
+        sections: editedArticle.sections,
+        questions: editedArticle.questions,
+        facilitatorGuide: editedArticle.facilitatorGuide,
+      })
+      setArticle(prev => ({
+        ...prev,
+        title: editedArticle.title,
+        sections: editedArticle.sections,
+        questions: editedArticle.questions,
+        facilitatorGuide: editedArticle.facilitatorGuide,
+      }))
+      setIsEditMode(false)
+      setEditedArticle(null)
+    } catch (err) {
+      console.error('수정 저장 오류:', err)
+      alert('저장에 실패했습니다.')
+    } finally {
+      setIsSavingEdit(false)
+    }
+  }
+
+  const handleCancelEdit = () => {
+    setIsEditMode(false)
+    setEditedArticle(null)
   }
 
   const handleCommentSubmit = async (e) => {
@@ -157,8 +214,9 @@ function ArticleDetailPage() {
     )
   }
 
-  // 질문을 섹션별로 그룹화
-  const groupedQuestions = (article.questions || []).reduce((acc, q) => {
+  const activeArticle = isEditMode ? editedArticle : article
+
+  const groupedQuestions = (activeArticle.questions || []).reduce((acc, q) => {
     const section = q.sectionId || 1
     if (!acc[section]) acc[section] = []
     acc[section].push(q)
@@ -175,25 +233,54 @@ function ArticleDetailPage() {
           목록으로
         </Link>
         <div className="detail-actions">
-          <button className="btn btn-outline" onClick={handleDownloadHwpx}>
-            <Download size={18} />
-            다운로드
-          </button>
-          <button className="btn btn-secondary" onClick={handleEdit}>
-            <Lock size={18} />
-            수정
-          </button>
-          <button className="btn btn-secondary" onClick={handleDelete}>
-            <Trash2 size={18} />
-            삭제
-          </button>
+          {isEditMode ? (
+            <>
+              <button className="btn btn-outline" onClick={handleCancelEdit}>
+                <X size={18} />
+                취소
+              </button>
+              <button className="btn btn-primary" onClick={handleSaveEdit} disabled={isSavingEdit}>
+                {isSavingEdit ? <Loader2 size={18} className="spinner-icon" /> : <Save size={18} />}
+                {isSavingEdit ? '저장 중...' : '저장'}
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="btn btn-outline" onClick={handleDownloadHwpx}>
+                <Download size={18} />
+                다운로드
+              </button>
+              <button className="btn btn-secondary" onClick={handleEdit}>
+                <Lock size={18} />
+                수정
+              </button>
+              <button className="btn btn-secondary" onClick={handleDelete}>
+                <Trash2 size={18} />
+                삭제
+              </button>
+            </>
+          )}
         </div>
       </div>
 
-      <article className="article-detail">
+      <article className={`article-detail${isEditMode ? ' edit-mode' : ''}`}>
+        {isEditMode && (
+          <div className="edit-banner">
+            ✏️ 수정 모드 — 내용을 수정한 뒤 [저장]을 눌러주세요.
+          </div>
+        )}
+
         <header className="article-header">
-          <span className="article-category">{article.category || '기타'}</span>
-          <h1 className="article-title">{article.title}</h1>
+          <span className="article-category">{activeArticle.category || '기타'}</span>
+          {isEditMode ? (
+            <input
+              className="edit-input edit-title-input"
+              value={editedArticle.title}
+              onChange={(e) => setEditedArticle(prev => ({ ...prev, title: e.target.value }))}
+            />
+          ) : (
+            <h1 className="article-title">{article.title}</h1>
+          )}
           <div className="article-meta">
             <span className="meta-item">
               <User size={16} />
@@ -207,10 +294,27 @@ function ArticleDetailPage() {
         </header>
 
         <div className="article-body">
-          {article.sections?.map((section) => (
+          {activeArticle.sections?.map((section) => (
             <section key={section.id} className="article-section">
-              <h2 className="section-title">{section.title}</h2>
-              <div className="section-content">{section.content}</div>
+              {isEditMode ? (
+                <input
+                  className="edit-input edit-section-title-input"
+                  value={section.title}
+                  onChange={(e) => updateSectionField(section.id, 'title', e.target.value)}
+                />
+              ) : (
+                <h2 className="section-title">{section.title}</h2>
+              )}
+              {isEditMode ? (
+                <textarea
+                  className="edit-textarea"
+                  value={section.content}
+                  onChange={(e) => updateSectionField(section.id, 'content', e.target.value)}
+                  rows={8}
+                />
+              ) : (
+                <div className="section-content">{section.content}</div>
+              )}
 
               {groupedQuestions[section.id] && groupedQuestions[section.id].length > 0 && (
                 <div className="section-questions">
@@ -221,8 +325,20 @@ function ArticleDetailPage() {
                   {groupedQuestions[section.id].map((q) => {
                     questionNumber++
                     return (
-                      <div key={q.id} className="question-item">
-                        Q{questionNumber}. {q.text}
+                      <div key={q.id} className={`question-item${isEditMode ? ' question-item-edit' : ''}`}>
+                        {isEditMode ? (
+                          <div className="question-edit-row">
+                            <span className="question-number">Q{questionNumber}.</span>
+                            <textarea
+                              className="edit-textarea question-edit-textarea"
+                              value={q.text}
+                              onChange={(e) => updateQuestionText(q.id, e.target.value)}
+                              rows={2}
+                            />
+                          </div>
+                        ) : (
+                          `Q${questionNumber}. ${q.text}`
+                        )}
                       </div>
                     )
                   })}
@@ -232,19 +348,33 @@ function ArticleDetailPage() {
           ))}
         </div>
 
-        {article.facilitatorGuide && (
+        {(article.facilitatorGuide || isEditMode) && (
           <div className="facilitator-guide-section">
-            <button
-              className="guide-toggle-btn"
-              onClick={() => setShowGuide(!showGuide)}
-            >
-              📋 진행자 가이드
-              {showGuide ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-            </button>
-            {showGuide && (
-              <div className="guide-content">
-                <pre>{article.facilitatorGuide}</pre>
+            {isEditMode ? (
+              <div className="edit-section-block">
+                <p className="edit-section-label">📋 진행자 가이드</p>
+                <textarea
+                  className="edit-textarea"
+                  value={editedArticle.facilitatorGuide || ''}
+                  onChange={(e) => setEditedArticle(prev => ({ ...prev, facilitatorGuide: e.target.value }))}
+                  rows={10}
+                />
               </div>
+            ) : (
+              <>
+                <button
+                  className="guide-toggle-btn"
+                  onClick={() => setShowGuide(!showGuide)}
+                >
+                  📋 진행자 가이드
+                  {showGuide ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                </button>
+                {showGuide && (
+                  <div className="guide-content">
+                    <pre>{article.facilitatorGuide}</pre>
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
@@ -361,7 +491,6 @@ function ArticleDetailPage() {
         </form>
       </section>
 
-      {/* 비밀번호 모달 */}
       {showPasswordModal && (
         <div className="modal-overlay" onClick={() => setShowPasswordModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>

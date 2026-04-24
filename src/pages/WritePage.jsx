@@ -99,10 +99,11 @@ function WritePage() {
     try {
       const draftData = {
         ...formData,
-        pdfFile: null, // PDF는 저장 불가
-        pdfFiles: [], // PDF 배열도 저장 불가
-        pdfFileName: formData.pdfFileName, // 파일명만 저장
-        pdfFileNames: formData.pdfFileNames || [], // 파일명 배열은 유지
+        pdfFile: null,
+        pdfFiles: [],
+        referenceFiles: [],
+        pdfFileName: formData.pdfFileName,
+        pdfFileNames: formData.pdfFileNames || [],
         currentStep: currentStep
       }
       await saveDraft(draftData)
