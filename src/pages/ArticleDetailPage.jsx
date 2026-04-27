@@ -5,6 +5,174 @@ import { getArticle, getComments, addComment, verifyPassword, deleteArticle, upd
 import { downloadAsHwpx } from '../utils/hwpxExport'
 import './ArticleDetailPage.css'
 
+// ─── helpers ──────────────────────────────────────────────────────────────────
+
+function relativeTime(date) {
+  if (!date) return ''
+  const diff = (Date.now() - new Date(date).getTime()) / 1000
+  if (diff < 60) return '방금'
+  if (diff < 3600) return `${Math.floor(diff / 60)}분 전`
+  if (diff < 86400) return `${Math.floor(diff / 3600)}시간 전`
+  if (diff < 86400 * 30) return `${Math.floor(diff / 86400)}일 전`
+  return `${Math.floor(diff / (86400 * 30))}달 전`
+}
+
+const AVATAR_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4']
+function avatarColor(name) {
+  if (!name) return AVATAR_COLORS[0]
+  let h = 0
+  for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) | 0
+  return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length]
+}
+
+function buildCommentTree(flat) {
+  const byId = {}
+  const roots = []
+  flat.forEach(c => { byId[c.id] = { ...c, replies: [] } })
+  flat.forEach(c => {
+    if (c.parentId && byId[c.parentId]) byId[c.parentId].replies.push(byId[c.id])
+    else roots.push(byId[c.id])
+  })
+  return roots
+}
+
+// ─── ParagraphComments ────────────────────────────────────────────────────────
+
+function ParagraphComments({ paragraphKey, flatComments, savedName, onSaveName, onSubmitComment }) {
+  const [collapsed, setCollapsed] = useState(false)
+  const [name, setName] = useState(savedName || '')
+  const [content, setContent] = useState('')
+  const [replyTo, setReplyTo] = useState(null)
+  const [replyContent, setReplyContent] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (savedName && !name) setName(savedName)
+  }, [savedName])
+
+  const tree = buildCommentTree(flatComments)
+  const count = flatComments.length
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!content.trim()) return
+    const author = name.trim() || '익명'
+    setSubmitting(true)
+    try {
+      await onSubmitComment(paragraphKey, author, content.trim(), null, 0)
+      if (name.trim()) onSaveName(name.trim())
+      setContent('')
+    } catch {
+      alert('댓글 등록에 실패했습니다.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const handleReplySubmit = async (e) => {
+    e.preventDefault()
+    if (!replyContent.trim() || !replyTo) return
+    const author = name.trim() || '익명'
+    setSubmitting(true)
+    try {
+      await onSubmitComment(paragraphKey, author, replyContent.trim(), replyTo.id, (replyTo.depth || 0) + 1)
+      if (name.trim()) onSaveName(name.trim())
+      setReplyContent('')
+      setReplyTo(null)
+    } catch {
+      alert('댓글 등록에 실패했습니다.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const toggleReply = (comment) => {
+    setReplyTo(prev => prev?.id === comment.id ? null : { id: comment.id, author: comment.author, depth: comment.depth || 0 })
+    setReplyContent('')
+  }
+
+  const renderComment = (comment, depth) => (
+    <div key={comment.id} className={`pc-comment pc-depth-${Math.min(depth, 2)}`}>
+      <div className="pc-avatar" style={{ backgroundColor: avatarColor(comment.author) }}>
+        {(comment.author || '?')[0]}
+      </div>
+      <div className="pc-comment-right">
+        <div className="pc-meta">
+          <span className="pc-author">{comment.author}</span>
+          <span className="pc-time">{relativeTime(comment.createdAt)}</span>
+        </div>
+        <p className="pc-text">{comment.content}</p>
+        {depth < 2 && (
+          <button className="pc-reply-btn" onClick={() => toggleReply(comment)}>
+            {replyTo?.id === comment.id ? '취소' : '답글달기'}
+          </button>
+        )}
+        {replyTo?.id === comment.id && (
+          <form className="pc-inline-reply" onSubmit={handleReplySubmit}>
+            <div className="pc-form-row">
+              <textarea
+                className="pc-textarea"
+                placeholder={`@${comment.author}에게 답글...`}
+                value={replyContent}
+                onChange={e => setReplyContent(e.target.value)}
+                rows={2}
+                autoFocus
+              />
+              <button type="submit" className="pc-send-btn" disabled={submitting}>
+                {submitting ? <Loader2 size={14} className="spinner-icon" /> : <Send size={14} />}
+              </button>
+            </div>
+          </form>
+        )}
+        {comment.replies?.map(r => renderComment(r, depth + 1))}
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="paragraph-comments">
+      <div className="pc-bar">
+        <button className="pc-add-btn" title={collapsed ? '댓글열기' : '댓글닫기'} onClick={() => setCollapsed(v => !v)}>
+          {collapsed ? <ChevronDown size={15} /> : <ChevronUp size={15} />}
+        </button>
+        <button className="pc-count-btn" title="댓글달기" onClick={() => setCollapsed(v => !v)}>
+          <MessageSquare size={13} />
+          {count}
+        </button>
+      </div>
+
+      {!collapsed && (
+        <div className="pc-panel">
+          {tree.map(c => renderComment(c, 0))}
+
+          <form className="pc-new-form" onSubmit={handleSubmit}>
+            <input
+              className="pc-name-input"
+              placeholder="이름 (빈칸 = 익명)"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+            <div className="pc-form-row">
+              <textarea
+                className="pc-textarea"
+                placeholder="댓글을 입력하세요..."
+                value={content}
+                onChange={e => setContent(e.target.value)}
+                rows={2}
+              />
+              <button type="submit" className="pc-send-btn" disabled={submitting || !content.trim()}>
+                {submitting ? <Loader2 size={14} className="spinner-icon" /> : <Send size={14} />}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── ArticleDetailPage ────────────────────────────────────────────────────────
+
 function ArticleDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -17,9 +185,9 @@ function ArticleDetailPage() {
   const [passwordAction, setPasswordAction] = useState('edit')
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const [newComment, setNewComment] = useState({ author: '', content: '' })
-  const [comments, setComments] = useState([])
-  const [isSubmittingComment, setIsSubmittingComment] = useState(false)
+
+  const [allComments, setAllComments] = useState([])
+  const [savedName, setSavedName] = useState(() => localStorage.getItem('commentAuthorName') || '')
 
   const [isEditMode, setIsEditMode] = useState(false)
   const [editedArticle, setEditedArticle] = useState(null)
@@ -34,11 +202,8 @@ function ArticleDetailPage() {
     try {
       setLoading(true)
       const data = await getArticle(id)
-      if (data) {
-        setArticle(data)
-      } else {
-        setError('글을 찾을 수 없습니다.')
-      }
+      if (data) setArticle(data)
+      else setError('글을 찾을 수 없습니다.')
     } catch (err) {
       console.error('글 로딩 오류:', err)
       setError('글을 불러오는데 실패했습니다.')
@@ -50,7 +215,7 @@ function ArticleDetailPage() {
   const loadComments = async () => {
     try {
       const data = await getComments(id)
-      setComments(data)
+      setAllComments(data)
     } catch (err) {
       console.error('댓글 로딩 오류:', err)
     }
@@ -58,12 +223,19 @@ function ArticleDetailPage() {
 
   const formatDate = (date) => {
     if (!date) return ''
-    const d = new Date(date)
-    return d.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
+    return new Date(date).toLocaleDateString('ko-KR', {
+      year: 'numeric', month: '2-digit', day: '2-digit'
     }).replace(/\. /g, '.').replace(/\.$/, '')
+  }
+
+  const handleSaveName = (name) => {
+    setSavedName(name)
+    localStorage.setItem('commentAuthorName', name)
+  }
+
+  const handleParagraphCommentSubmit = async (paragraphKey, author, content, parentId, depth) => {
+    await addComment(id, author, content, paragraphKey, parentId, depth)
+    await loadComments()
   }
 
   const handleEdit = () => {
@@ -82,19 +254,11 @@ function ArticleDetailPage() {
   }
 
   const handlePasswordSubmit = async () => {
-    if (!password) {
-      setPasswordError('비밀번호를 입력해주세요.')
-      return
-    }
-
+    if (!password) { setPasswordError('비밀번호를 입력해주세요.'); return }
     const isValid = await verifyPassword(id, password)
-    if (!isValid) {
-      setPasswordError('비밀번호가 일치하지 않습니다.')
-      return
-    }
+    if (!isValid) { setPasswordError('비밀번호가 일치하지 않습니다.'); return }
 
     setShowPasswordModal(false)
-
     if (passwordAction === 'delete') {
       try {
         await deleteArticle(id)
@@ -117,36 +281,36 @@ function ArticleDetailPage() {
   const updateSectionField = (sectionId, field, value) => {
     setEditedArticle(prev => ({
       ...prev,
-      sections: prev.sections.map(s =>
-        s.id === sectionId ? { ...s, [field]: value } : s
-      )
+      sections: prev.sections.map(s => s.id === sectionId ? { ...s, [field]: value } : s)
     }))
   }
 
   const updateQuestionText = (questionId, value) => {
     setEditedArticle(prev => ({
       ...prev,
-      questions: prev.questions.map(q =>
-        q.id === questionId ? { ...q, text: value } : q
-      )
+      questions: prev.questions.map(q => q.id === questionId ? { ...q, text: value } : q)
     }))
   }
 
+  // Bug fix: exclude undefined facilitatorGuide to prevent Firestore rejection
   const handleSaveEdit = async () => {
     setIsSavingEdit(true)
     try {
-      await updateArticle(id, {
+      const updateData = {
         title: editedArticle.title,
         sections: editedArticle.sections,
         questions: editedArticle.questions,
-        facilitatorGuide: editedArticle.facilitatorGuide,
-      })
+      }
+      if (editedArticle.facilitatorGuide !== undefined) {
+        updateData.facilitatorGuide = editedArticle.facilitatorGuide
+      }
+      await updateArticle(id, updateData)
       setArticle(prev => ({
         ...prev,
         title: editedArticle.title,
         sections: editedArticle.sections,
         questions: editedArticle.questions,
-        facilitatorGuide: editedArticle.facilitatorGuide,
+        ...(editedArticle.facilitatorGuide !== undefined && { facilitatorGuide: editedArticle.facilitatorGuide }),
       }))
       setIsEditMode(false)
       setEditedArticle(null)
@@ -161,23 +325,6 @@ function ArticleDetailPage() {
   const handleCancelEdit = () => {
     setIsEditMode(false)
     setEditedArticle(null)
-  }
-
-  const handleCommentSubmit = async (e) => {
-    e.preventDefault()
-    if (!newComment.author.trim() || !newComment.content.trim()) return
-
-    setIsSubmittingComment(true)
-    try {
-      await addComment(id, newComment.author.trim(), newComment.content.trim())
-      setNewComment({ author: '', content: '' })
-      await loadComments()
-    } catch (err) {
-      console.error('댓글 등록 오류:', err)
-      alert('댓글 등록에 실패했습니다.')
-    } finally {
-      setIsSubmittingComment(false)
-    }
   }
 
   const handleDownloadHwpx = async () => {
@@ -206,9 +353,7 @@ function ArticleDetailPage() {
       <div className="article-detail-page">
         <div className="error-state">
           <p>{error || '글을 찾을 수 없습니다.'}</p>
-          <Link to="/" className="btn btn-primary">
-            목록으로 돌아가기
-          </Link>
+          <Link to="/" className="btn btn-primary">목록으로 돌아가기</Link>
         </div>
       </div>
     )
@@ -217,9 +362,17 @@ function ArticleDetailPage() {
   const activeArticle = isEditMode ? editedArticle : article
 
   const groupedQuestions = (activeArticle.questions || []).reduce((acc, q) => {
-    const section = q.sectionId || 1
-    if (!acc[section]) acc[section] = []
-    acc[section].push(q)
+    const key = q.sectionId || 1
+    if (!acc[key]) acc[key] = []
+    acc[key].push(q)
+    return acc
+  }, {})
+
+  // Group paragraph comments by key
+  const commentsByParagraph = allComments.reduce((acc, c) => {
+    if (!c.paragraphKey) return acc
+    if (!acc[c.paragraphKey]) acc[c.paragraphKey] = []
+    acc[c.paragraphKey].push(c)
     return acc
   }, {})
 
@@ -282,14 +435,8 @@ function ArticleDetailPage() {
             <h1 className="article-title">{article.title}</h1>
           )}
           <div className="article-meta">
-            <span className="meta-item">
-              <User size={16} />
-              {article.authorName}
-            </span>
-            <span className="meta-item">
-              <Calendar size={16} />
-              {formatDate(article.createdAt)}
-            </span>
+            <span className="meta-item"><User size={16} />{article.authorName}</span>
+            <span className="meta-item"><Calendar size={16} />{formatDate(article.createdAt)}</span>
           </div>
         </header>
 
@@ -305,6 +452,7 @@ function ArticleDetailPage() {
               ) : (
                 <h2 className="section-title">{section.title}</h2>
               )}
+
               {isEditMode ? (
                 <textarea
                   className="edit-textarea"
@@ -313,10 +461,26 @@ function ArticleDetailPage() {
                   rows={8}
                 />
               ) : (
-                <div className="section-content">{section.content}</div>
+                <div className="section-paragraphs">
+                  {(section.content || '').split(/\n\n+/).filter(p => p.trim()).map((para, idx) => {
+                    const pKey = `s${section.id}_p${idx}`
+                    return (
+                      <div key={pKey} className="paragraph-block">
+                        <p className="paragraph-text">{para}</p>
+                        <ParagraphComments
+                          paragraphKey={pKey}
+                          flatComments={commentsByParagraph[pKey] || []}
+                          savedName={savedName}
+                          onSaveName={handleSaveName}
+                          onSubmitComment={handleParagraphCommentSubmit}
+                        />
+                      </div>
+                    )
+                  })}
+                </div>
               )}
 
-              {groupedQuestions[section.id] && groupedQuestions[section.id].length > 0 && (
+              {groupedQuestions[section.id]?.length > 0 && (
                 <div className="section-questions">
                   <div className="questions-header">
                     <MessageSquare size={18} />
@@ -362,10 +526,7 @@ function ArticleDetailPage() {
               </div>
             ) : (
               <>
-                <button
-                  className="guide-toggle-btn"
-                  onClick={() => setShowGuide(!showGuide)}
-                >
+                <button className="guide-toggle-btn" onClick={() => setShowGuide(!showGuide)}>
                   📋 진행자 가이드
                   {showGuide ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
@@ -381,10 +542,7 @@ function ArticleDetailPage() {
 
         {article.summaryCard && (
           <div className="summary-card-section">
-            <button
-              className="card-toggle-btn"
-              onClick={() => setShowSummaryCard(!showSummaryCard)}
-            >
+            <button className="card-toggle-btn" onClick={() => setShowSummaryCard(!showSummaryCard)}>
               <FileText size={18} />
               발제 요약 카드
               {showSummaryCard ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -398,30 +556,23 @@ function ArticleDetailPage() {
                       <p className="card-item-text">{article.summaryCard.oneLiner}</p>
                     </div>
                   )}
-
-                  {article.summaryCard.keyPoints && article.summaryCard.keyPoints.length > 0 && (
+                  {article.summaryCard.keyPoints?.length > 0 && (
                     <div className="card-item">
                       <h4 className="card-item-title">핵심 포인트</h4>
                       <ul className="card-item-list">
-                        {article.summaryCard.keyPoints.map((point, idx) => (
-                          <li key={idx}>{point}</li>
-                        ))}
+                        {article.summaryCard.keyPoints.map((point, idx) => <li key={idx}>{point}</li>)}
                       </ul>
                     </div>
                   )}
-
-                  {article.summaryCard.relatedLaws && article.summaryCard.relatedLaws.length > 0 && (
+                  {article.summaryCard.relatedLaws?.length > 0 && (
                     <div className="card-item">
                       <h4 className="card-item-title">관련 법령</h4>
                       <ul className="card-item-list laws">
-                        {article.summaryCard.relatedLaws.map((law, idx) => (
-                          <li key={idx}>{law}</li>
-                        ))}
+                        {article.summaryCard.relatedLaws.map((law, idx) => <li key={idx}>{law}</li>)}
                       </ul>
                     </div>
                   )}
-
-                  {article.summaryCard.discussionQuestions && article.summaryCard.discussionQuestions.length > 0 && (
+                  {article.summaryCard.discussionQuestions?.length > 0 && (
                     <div className="card-item">
                       <h4 className="card-item-title">토의 질문</h4>
                       <ol className="card-item-list numbered">
@@ -437,59 +588,6 @@ function ArticleDetailPage() {
           </div>
         )}
       </article>
-
-      <section className="comments-section">
-        <h3 className="comments-title">
-          <MessageSquare size={20} />
-          댓글 ({comments.length})
-        </h3>
-
-        <div className="comments-list">
-          {comments.length === 0 ? (
-            <p className="no-comments">아직 댓글이 없습니다.</p>
-          ) : (
-            comments.map((comment) => (
-              <div key={comment.id} className="comment-item">
-                <div className="comment-header">
-                  <span className="comment-author">{comment.author}</span>
-                  <span className="comment-date">{formatDate(comment.createdAt)}</span>
-                </div>
-                <p className="comment-content">{comment.content}</p>
-              </div>
-            ))
-          )}
-        </div>
-
-        <form className="comment-form" onSubmit={handleCommentSubmit}>
-          <div className="comment-form-header">댓글 작성</div>
-          <div className="comment-form-row">
-            <input
-              type="text"
-              placeholder="이름"
-              value={newComment.author}
-              onChange={(e) => setNewComment({ ...newComment, author: e.target.value })}
-              className="comment-author-input"
-              required
-            />
-          </div>
-          <div className="comment-form-row">
-            <textarea
-              placeholder="댓글 내용을 입력하세요..."
-              value={newComment.content}
-              onChange={(e) => setNewComment({ ...newComment, content: e.target.value })}
-              className="comment-content-input"
-              rows={3}
-              required
-            />
-          </div>
-          <div className="comment-form-actions">
-            <button type="submit" className="btn btn-primary" disabled={isSubmittingComment}>
-              {isSubmittingComment ? <Loader2 size={16} className="spinner-icon" /> : <Send size={16} />}
-              {isSubmittingComment ? '등록 중...' : '댓글 등록'}
-            </button>
-          </div>
-        </form>
-      </section>
 
       {showPasswordModal && (
         <div className="modal-overlay" onClick={() => setShowPasswordModal(false)}>
@@ -507,18 +605,8 @@ function ArticleDetailPage() {
             />
             {passwordError && <p className="password-error">{passwordError}</p>}
             <div className="modal-actions">
-              <button
-                className="btn btn-secondary"
-                onClick={() => setShowPasswordModal(false)}
-              >
-                취소
-              </button>
-              <button
-                className="btn btn-primary"
-                onClick={handlePasswordSubmit}
-              >
-                확인
-              </button>
+              <button className="btn btn-secondary" onClick={() => setShowPasswordModal(false)}>취소</button>
+              <button className="btn btn-primary" onClick={handlePasswordSubmit}>확인</button>
             </div>
           </div>
         </div>

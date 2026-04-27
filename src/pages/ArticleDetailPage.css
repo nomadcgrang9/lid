@@ -599,6 +599,210 @@
   margin-bottom: 10px;
 }
 
+/* ─── Paragraph comment system ──────────────────────────────────────────── */
+
+.section-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.paragraph-block {
+  margin-bottom: 4px;
+}
+
+.paragraph-text {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  margin: 0 0 0 0;
+}
+
+.paragraph-comments {
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 28px;
+}
+
+/* Always-visible bottom bar: [∨/∧]  ○ N */
+.pc-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 6px 0;
+}
+
+.pc-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px 2px 0;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+.pc-add-btn:hover { color: var(--primary-color); }
+
+.pc-count-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: none;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 12px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.pc-count-btn:hover { color: var(--primary-color); border-color: var(--primary-color); }
+
+/* Expanded panel */
+.pc-panel {
+  padding: 12px 0 4px 0;
+}
+
+/* Comment node */
+.pc-comment {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.pc-depth-1 { margin-left: 38px; }
+.pc-depth-2 { margin-left: 76px; }
+
+.pc-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pc-comment-right { flex: 1; min-width: 0; }
+
+.pc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+.pc-author { font-size: 0.83rem; font-weight: 600; color: var(--text-primary); }
+.pc-time   { font-size: 0.75rem; color: var(--text-secondary); }
+
+.pc-text {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+  white-space: pre-wrap;
+}
+
+.pc-reply-btn {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+.pc-reply-btn:hover { color: var(--primary-color); }
+
+/* Inline reply form */
+.pc-inline-reply {
+  margin-top: 8px;
+}
+
+/* New comment form */
+.pc-new-form {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.pc-name-input {
+  width: 160px;
+  padding: 5px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+  display: block;
+  background: var(--background-color);
+  color: var(--text-primary);
+}
+.pc-name-input:focus { outline: none; border-color: var(--primary-color); }
+
+.pc-form-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.pc-textarea {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: none;
+  line-height: 1.5;
+  background: var(--background-color);
+  color: var(--text-primary);
+}
+.pc-textarea:focus { outline: none; border-color: var(--primary-color); }
+
+.pc-send-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.15s;
+}
+.pc-send-btn:hover:not(:disabled) { background-color: var(--primary-hover); }
+.pc-send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Loading / error states (defined here to not depend on other page CSS) */
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 0;
+  color: var(--text-secondary);
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 /* Missing base styles */
 .no-comments {
   color: var(--text-secondary);

@@ -361,14 +361,19 @@ export async function getComments(articleId) {
 }
 
 // 댓글 추가
-export async function addComment(articleId, author, content) {
+export async function addComment(articleId, author, content, paragraphKey = null, parentId = null, depth = 0) {
   try {
-    const docRef = await addDoc(collection(db, COMMENTS_COLLECTION), {
+    const commentData = {
       articleId,
       author,
       content,
+      depth,
       createdAt: serverTimestamp()
-    })
+    }
+    if (paragraphKey !== null) commentData.paragraphKey = paragraphKey
+    if (parentId !== null) commentData.parentId = parentId
+
+    const docRef = await addDoc(collection(db, COMMENTS_COLLECTION), commentData)
     return docRef.id
   } catch (error) {
     console.error('댓글 추가 오류:', error)
