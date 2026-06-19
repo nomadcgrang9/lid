@@ -1,0 +1,266 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - link "콘텐츠로 건너뛰기" [ref=e5] [cursor=pointer]:
+      - /url: "#wish-list"
+      - generic [ref=e6]: 콘텐츠로 건너뛰기
+    - main [ref=e7]:
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - navigation:
+            - list:
+              - listitem [ref=e11]:
+                - link "Padlet 로고" [ref=e12] [cursor=pointer]:
+                  - /url: https://padlet.com/dashboard
+                  - img "Padlet 로고" [ref=e13]
+              - listitem [ref=e15]:
+                - list [ref=e16]:
+                  - listitem [ref=e17]:
+                    - generic [ref=e19] [cursor=pointer]:
+                      - img [ref=e22]
+                      - searchbox "키워드로 게시물 검색" [ref=e24]
+                  - listitem [ref=e25]:
+                    - button "슬라이드쇼 열기" [ref=e26] [cursor=pointer]:
+                      - img [ref=e28]
+                      - generic [ref=e30]: 슬라이드쇼 만들기
+                  - listitem [ref=e32]:
+                    - button "공유 패널 열기" [ref=e33] [cursor=pointer]:
+                      - img [ref=e35]
+                      - generic [ref=e37]: 공유
+                  - listitem [ref=e39]:
+                    - list [ref=e40]:
+                      - listitem [ref=e41]:
+                        - button "활동 패널 열기" [ref=e42] [cursor=pointer]:
+                          - img [ref=e44]
+                      - listitem [ref=e48]:
+                        - button "이 게시판 복제" [ref=e49] [cursor=pointer]:
+                          - img [ref=e51]
+                      - listitem [ref=e55]:
+                        - button "Padlet 작업 더보기" [ref=e56] [cursor=pointer]:
+                          - img [ref=e58]
+                  - listitem [ref=e61]:
+                    - link "Padlet에 가입하기" [ref=e62] [cursor=pointer]:
+                      - /url: https://padlet.com/auth/signup?referrer=https%3A%2F%2Fpadlet.com%2Fdodqod%2Fpadlet-nur97cfr6ur6gf2g
+                      - generic [ref=e63]: Padlet에 가입하기
+                  - listitem [ref=e66]:
+                    - button "가입 페이지로 이동" [ref=e67] [cursor=pointer]:
+                      - img [ref=e68]
+                  - listitem:
+                    - generic:
+                      - img
+                      - button "게시물" [ref=e70] [cursor=pointer]:
+                        - img [ref=e72]
+                        - generic [ref=e74]: 게시물
+          - generic [ref=e75]:
+            - generic [ref=e77]: Padlet 아이콘을 변경할 수 있는 권한 없음
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - link "hg a" [ref=e80] [cursor=pointer]:
+                  - /url: https://padlet.com/dodqod
+                - generic [ref=e81]:
+                  - text: •
+                  - time [ref=e82]: 2시간
+              - heading "나의 위대한 Padlet" [level=1] [ref=e83]
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - heading "사례" [level=2] [ref=e90]
+              - generic [ref=e92]:
+                - button "이 섹션에 포스트 추가" [ref=e93] [cursor=pointer]:
+                  - img [ref=e96]
+                - button "섹션 작업 메뉴 열기" [ref=e98] [cursor=pointer]:
+                  - img [ref=e101]
+            - generic [ref=e103]:
+              - article "사례1문단" [ref=e107]:
+                - generic [ref=e109]:
+                  - generic [ref=e111]:
+                    - generic [ref=e112]:
+                      - generic [ref=e114]:
+                        - link "hg a 프로필로 이동" [ref=e116] [cursor=pointer]:
+                          - /url: https://padlet.com/dodqod
+                          - img "hg a의 아바타" [ref=e117]
+                        - generic [ref=e119]:
+                          - link "hg a 프로필로 이동" [ref=e121] [cursor=pointer]:
+                            - /url: https://padlet.com/dodqod
+                            - text: hg a
+                          - time [ref=e122]: 3시간 전
+                      - heading "사례1문단" [level=3] [ref=e124]
+                    - paragraph [ref=e125]:
+                      - paragraph [ref=e126]: 초등학교 입학을 앞둔 아이의 책가방을 미리 꾸려보던 학부모님은 머릿속이 하얘지는 것을 느낍니다. 입학 준비물 목록에 적힌 연필, 공책, 알림장 등의 단어가 유독 눈에 크게 들어옵니다. 한글을 아직 읽고 쓰는 데 서툰 아이가 과연 이걸 제대로 쓸 수 있을지 덜컥 겁이 납니다. 유치원 엄마들이 모인 단체 대화방에서는 이미 겨울방학 동안 한글 과외를 시작했다거나, 유명 학습지 프로그램을 통해 국어 선행학습을 마쳤다는 이야기가 연일 오갑니다. “요즘은 다 떼고 온대요”, “학교만 믿고 있다가 우리 애만 기죽으면 어떡해요?”라는 말들이 비수처럼 가슴에 꽂힙니다. 분명 ‘한글은 초등학교에 들어가면 처음부터 가르친다’는 말을 들었고, 아이를 닦달하고 싶지 않아 여태껏 놀이에 집중해 왔는데 갑자기 나 혼자 너무 안일한 부모가 된 것 같은 죄책감과 불안감에 휩싸입니다. 결국 학부모님은 늦은 밤, 주변 학원의 ‘초1 한글 완성반’을 검색하기 시작합니다. 서점과 앱스토어 등을 뒤져 한글 떼기 등을 검색합니다. 우리 아이가 입학 첫날부터 글자를 몰라 선생님 말씀에 집중하지 못하고 친구들 사이에서 소외감을 느끼는 장면을 상상하고 싶지 않기 때문입니다.
+                      - paragraph [ref=e127]
+                  - button "게시물 작업 더보기" [ref=e132] [cursor=pointer]:
+                    - img [ref=e134]
+                  - generic [ref=e137]:
+                    - generic [ref=e138]:
+                      - button "반응 추가" [ref=e143] [cursor=pointer]:
+                        - img [ref=e145]
+                      - button "이 게시물에 댓글 표시" [ref=e154] [cursor=pointer]:
+                        - generic [ref=e155]:
+                          - img [ref=e157]
+                          - generic [ref=e159]: "5"
+                          - generic [ref=e160]: 이 게시물에 댓글 5개 있음
+                    - generic [ref=e161]:
+                      - generic [ref=e163]:
+                        - generic [ref=e164]:
+                          - img "오윤경의 아바타" [ref=e166]
+                          - generic [ref=e167]:
+                            - generic [ref=e169]: 오윤경
+                            - time [ref=e170]: 3시간 전
+                        - paragraph [ref=e173]: 비수처럼 꽂힌다는 좀더 순화해서 표현하는 것이 좋겠다
+                      - generic [ref=e175]:
+                        - generic [ref=e176]:
+                          - link [ref=e178] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e179]
+                          - generic [ref=e180]:
+                            - link "이창건 프로필로 이동" [ref=e182] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e183]: 3시간 전
+                        - paragraph [ref=e186]: 유치원에서는 한글교육을 해도 된다. 초중등의 선행학습의 개념은 아니다.
+                      - generic [ref=e188]:
+                        - generic [ref=e189]:
+                          - link [ref=e191] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e192]
+                          - generic [ref=e193]:
+                            - link "이창건 프로필로 이동" [ref=e195] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e196]: 3시간 전
+                        - paragraph [ref=e199]: 그러면 정책이 잘못 설계된건 아닌가요. 현실에 맞지 않게 설계된 정책과 현장의 어려움
+                      - generic [ref=e201]:
+                        - generic [ref=e202]:
+                          - img "오윤경의 아바타" [ref=e204]
+                          - generic [ref=e205]:
+                            - generic [ref=e207]: 오윤경
+                            - time [ref=e208]: 3시간 전
+                        - paragraph [ref=e211]: 유치원에서 특성화로 비공식적으로 진행하고 있다. (근거가 없다. 유치원은 선행이라는 개념 자체가 없음. 한글 자체에 대한 초점은 아님. 한반에 3~4명 정도 한글을 떼고 오지 않는다. 다른 교과를 이해하려면 왜 안 떼고 오느냐는 정말 난해한 지점이다.
+                      - generic [ref=e213]:
+                        - generic [ref=e214]:
+                          - link [ref=e216] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e217]
+                          - generic [ref=e218]:
+                            - link "이창건 프로필로 이동" [ref=e220] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e221]: 2시간 전
+                        - paragraph [ref=e224]: 한글책임교육이라는게 뭔가. 사회적인 공통합의 없고 현실 실제 일어나는 현실에 대해 너무 촘촘하게 설계되어 있지를 않다. 정책이.
+                      - generic [ref=e225]:
+                        - button "댓글에 첨부파일 추가" [ref=e226] [cursor=pointer]:
+                          - img [ref=e229]
+                        - button "댓글 추가" [ref=e234]
+              - article "사례2문단" [ref=e238]:
+                - generic [ref=e240]:
+                  - generic [ref=e242]:
+                    - generic [ref=e243]:
+                      - generic [ref=e245]:
+                        - link "hg a 프로필로 이동" [ref=e247] [cursor=pointer]:
+                          - /url: https://padlet.com/dodqod
+                          - img "hg a의 아바타" [ref=e248]
+                        - generic [ref=e250]:
+                          - link "hg a 프로필로 이동" [ref=e252] [cursor=pointer]:
+                            - /url: https://padlet.com/dodqod
+                            - text: hg a
+                          - time [ref=e253]: 3시간 전
+                      - heading "사례2문단" [level=3] [ref=e255]
+                    - paragraph [ref=e256]:
+                      - paragraph [ref=e257]: 한편, 3월의 교실에서 아이들을 맞이할 1학년 담임선생님은 설레는 마음으로 교실 환경을 꾸미고 있습니다. 선생님의 책상 위에는 딱딱한 받아쓰기 공책 대신 알록달록한 자음·모음 블록과 재미있는 그림이 가득한 낱말 카드가 놓여 있습니다. 컴퓨터에는 ‘한글또박또박’과 같은 인공지능 기반 한글 진단 및 보충 지도 프로그램이 설치되어 있습니다. 선생님의 연간 교육과정 계획표에는 1학기 내내 ‘노래로 배우는 가나다’, ‘몸으로 말해요! 자음 퀴즈’, ‘그림책 주인공에게 편지 쓰기’ 등 놀이와 체험 중심의 활동이 빼곡히 채워져 있습니다. 2022 개정 교육과정에 따라 초등 1학년의 국어 수업 시간은 34시간이 확대된 102시간 이상으로 대폭 확대되었습니다. 이는 국가가 모든 아이들의 한글 해득을 책임지겠다는 강력한 의지의 표현입니다. 선생님은 아이들이 글자를 ‘학습’하기 전에 ‘놀이’로 즐겁게 만나게 해주고 싶습니다. 억지로 외우는 글자가 아닌 세상과 소통하는 즐거운 도구로서 한글과 첫 만남을 갖게 해주는 것이 자신의 가장 중요한 역할이라고 믿고 있습니다.
+                      - paragraph [ref=e258]
+                  - button "게시물 작업 더보기" [ref=e263] [cursor=pointer]:
+                    - img [ref=e265]
+                  - generic [ref=e268]:
+                    - generic [ref=e269]:
+                      - button "반응 추가" [ref=e274] [cursor=pointer]:
+                        - img [ref=e276]
+                      - button "이 게시물에 댓글 표시" [ref=e285] [cursor=pointer]:
+                        - generic [ref=e286]:
+                          - img [ref=e288]
+                          - generic [ref=e290]: "1"
+                          - generic [ref=e291]: 이 게시물에 댓글 1개 있음
+                    - generic [ref=e292]:
+                      - generic [ref=e294]:
+                        - generic [ref=e295]:
+                          - link [ref=e297] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e298]
+                          - generic [ref=e299]:
+                            - link "이창건 프로필로 이동" [ref=e301] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e302]: 3시간 전
+                        - paragraph [ref=e305]:
+                          - text: "| 1학년 국어 시수 \"102시간 이상\" | 2022 개정 교육과정으로 \"1학년 국어 수업 시간 총 102시간 이상으로 대폭 확대\" | 102시간은 1~2학년군 한글 해득 집중교육 시간(2015 개정 68시간 → 34시간 증배)을 가리키는 것으로 추정되나, 글 표현(\"1학년 국어 수업 시간 총 102시간\")은"
+                          - strong [ref=e306]: 전체 국어 시수로 오독될 여지
+                          - text: 가 있음
+                      - generic [ref=e307]:
+                        - button "댓글에 첨부파일 추가" [ref=e308] [cursor=pointer]:
+                          - img [ref=e311]
+                        - button "댓글 추가" [ref=e316]
+              - article "사례3문단" [ref=e320]:
+                - generic [ref=e322]:
+                  - generic [ref=e324]:
+                    - generic [ref=e325]:
+                      - generic [ref=e327]:
+                        - link "hg a 프로필로 이동" [ref=e329] [cursor=pointer]:
+                          - /url: https://padlet.com/dodqod
+                          - img "hg a의 아바타" [ref=e330]
+                        - generic [ref=e332]:
+                          - link "hg a 프로필로 이동" [ref=e334] [cursor=pointer]:
+                            - /url: https://padlet.com/dodqod
+                            - text: hg a
+                          - time [ref=e335]: 3시간 전
+                      - heading "사례3문단" [level=3] [ref=e337]
+                    - paragraph [ref=e338]:
+                      - paragraph [ref=e339]: 바로 이 지점에서 학부모님의 절박한 불안과 선생님의 교육적 신념 사이에 보이지 않는 벽이 생깁니다. 학부모님은 ‘결과’의 평등을 원합니다. 우리 아이가 남들만큼은 읽고 쓸 수 있어야 한다는 생각에 입학 전부터 아이를 채근하게 됩니다. 반면 선생님은 ‘과정’의 중요성을 강조합니다. 모든 아이가 각자의 속도에 맞춰 즐겁게 배우며 탄탄한 기초를 다져야 한다는 교육 철학을 가지고 있습니다. 학부모님은 ‘학교 밖’의 속도 경쟁을 보며 불안해하고, 선생님은 ‘학교 안’의 교육 원칙을 지키려 합니다. 이 입장 차이는 ‘한글책임교육’이라는 훌륭한 정책적 취지에도 불구하고 학부모에게는 끝없는 불안을, 교사에게는 교육과정 운영의 어려움을 안겨주는 안타까운 갈등의 시작점이 되곤 합니다.
+                      - paragraph [ref=e340]
+                  - button "게시물 작업 더보기" [ref=e345] [cursor=pointer]:
+                    - img [ref=e347]
+                  - generic [ref=e350]:
+                    - generic [ref=e351]:
+                      - button "반응 추가" [ref=e356] [cursor=pointer]:
+                        - img [ref=e358]
+                      - button "이 게시물에 댓글 표시" [ref=e367] [cursor=pointer]:
+                        - generic [ref=e368]:
+                          - img [ref=e370]
+                          - generic [ref=e372]: "1"
+                          - generic [ref=e373]: 이 게시물에 댓글 1개 있음
+                    - generic [ref=e374]:
+                      - generic [ref=e376]:
+                        - generic [ref=e377]:
+                          - link [ref=e379] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e380]
+                          - generic [ref=e381]:
+                            - link "이창건 프로필로 이동" [ref=e383] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e384]: 2시간 전
+                        - paragraph [ref=e387]: 실제 어느정도 인지 데이터가 필요하다 정말 한글 어느정도 하고 오는 애가 몇 프로고 - 아마 검색하면 있을것
+                      - generic [ref=e388]:
+                        - button "댓글에 첨부파일 추가" [ref=e389] [cursor=pointer]:
+                          - img [ref=e392]
+                        - button "댓글 추가" [ref=e397]
+          - generic [ref=e399]:
+            - heading "관련법령" [level=2] [ref=e403]
+            - generic [ref=e405]:
+              - button "이 섹션에 포스트 추가" [ref=e406] [cursor=pointer]:
+                - img [ref=e409]
+              - button "섹션 작업 메뉴 열기" [ref=e411] [cursor=pointer]:
+                - img [ref=e414]
+          - generic [ref=e421]:
+            - heading "구조적문제" [level=2] [ref=e425]
+            - generic [ref=e427]:
+              - button "이 섹션에 포스트 추가" [ref=e428] [cursor=pointer]:
+                - img [ref=e431]
+              - button "섹션 작업 메뉴 열기" [ref=e433] [cursor=pointer]:
+                - img [ref=e436]
+          - generic [ref=e443]:
+            - heading "대안제시" [level=2] [ref=e447]
+            - generic [ref=e449]:
+              - button "이 섹션에 포스트 추가" [ref=e450] [cursor=pointer]:
+                - img [ref=e453]
+              - button "섹션 작업 메뉴 열기" [ref=e455] [cursor=pointer]:
+                - img [ref=e458]
+    - complementary "AI 채팅 패널"
+  - status

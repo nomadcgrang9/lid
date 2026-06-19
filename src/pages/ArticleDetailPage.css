@@ -96,6 +96,11 @@
   border-bottom: 2px solid var(--primary-color);
 }
 
+/* 수동 업로드 글 등 섹션 제목이 없는 경우 빈 제목 영역 숨김 */
+.section-title:empty {
+  display: none;
+}
+
 .section-content {
   font-size: 0.95rem;
   line-height: 1.9;

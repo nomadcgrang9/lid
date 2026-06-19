@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { MessageSquare, Calendar, User, Loader2 } from 'lucide-react'
+import { MessageSquare, Calendar, User, Loader2, Upload } from 'lucide-react'
 import { getArticles } from '../services/articleService'
+import ManualUploadModal from '../components/modals/ManualUploadModal'
 import './HomePage.css'
 
 function HomePage() {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showManualUpload, setShowManualUpload] = useState(false)
 
   useEffect(() => {
     loadArticles()
@@ -64,6 +66,13 @@ function HomePage() {
     <div className="home-page">
       <div className="page-header">
         <h2 className="page-title">작성된 글 목록</h2>
+        <button
+          className="btn btn-outline manual-upload-btn"
+          onClick={() => setShowManualUpload(true)}
+        >
+          <Upload size={16} />
+          수동 업로드
+        </button>
       </div>
 
       <div className="article-list">
@@ -103,6 +112,10 @@ function HomePage() {
           ))
         )}
       </div>
+
+      {showManualUpload && (
+        <ManualUploadModal onClose={() => setShowManualUpload(false)} />
+      )}
     </div>
   )
 }

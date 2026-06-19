@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Download, Lock, Save, X, Calendar, User, MessageSquare, ChevronDown, ChevronUp, Send, Loader2, Trash2, FileText } from 'lucide-react'
-import { getArticle, getComments, addComment, verifyPassword, deleteArticle, updateArticle } from '../services/articleService'
+import { getArticle, subscribeComments, addComment, verifyPassword, deleteArticle, updateArticle } from '../services/articleService'
 import { downloadAsHwpx } from '../utils/hwpxExport'
 import './ArticleDetailPage.css'
 
@@ -23,6 +23,21 @@ function avatarColor(name) {
   let h = 0
   for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) | 0
   return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length]
+}
+
+// 수동 업로드 글에서 '뼈대 줄'(소제목·법조문·항·불릿·링크·아주 짧은 줄)을 판별한다.
+// 뼈대 줄은 글자만 표시하고 댓글칸을 붙이지 않는다. 그 외 줄글에만 댓글칸을 단다.
+function isStructuralLine(text) {
+  const t = (text || '').trim()
+  if (!t) return true
+  if (t.length <= 12) return true                 // 아주 짧은 줄 (이름·소제목 등)
+  if (/^\d+\s*[.)]\s/.test(t)) return true         // 번호 소제목: "1. ", "2) "
+  if (/^제\s*\d+\s*조/.test(t)) return true         // 법조문 머리: "제20조"
+  if (/^[①-⑮㉠-㉭]/.test(t)) return true            // 동그라미 숫자/문자 항
+  if (/^[·•▪◦※*\-–—]/.test(t)) return true          // 불릿
+  if (/^(URL[:：]|https?:\/\/)/i.test(t)) return true // 링크/각주 머리
+  if (/https?:\/\//i.test(t) && t.length < 120) return true // URL 위주의 짧은 각주 줄
+  return false
 }
 
 function buildCommentTree(flat) {
@@ -195,7 +210,14 @@ function ArticleDetailPage() {
 
   useEffect(() => {
     loadArticle()
-    loadComments()
+  }, [id])
+
+  useEffect(() => {
+    if (!id) return
+    const unsubscribe = subscribeComments(id, (data) => {
+      setAllComments(data)
+    })
+    return () => unsubscribe()
   }, [id])
 
   const loadArticle = async () => {
@@ -209,15 +231,6 @@ function ArticleDetailPage() {
       setError('글을 불러오는데 실패했습니다.')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const loadComments = async () => {
-    try {
-      const data = await getComments(id)
-      setAllComments(data)
-    } catch (err) {
-      console.error('댓글 로딩 오류:', err)
     }
   }
 
@@ -235,7 +248,6 @@ function ArticleDetailPage() {
 
   const handleParagraphCommentSubmit = async (paragraphKey, author, content, parentId, depth) => {
     await addComment(id, author, content, paragraphKey, parentId, depth)
-    await loadComments()
   }
 
   const handleEdit = () => {
@@ -464,16 +476,20 @@ function ArticleDetailPage() {
                 <div className="section-paragraphs">
                   {(section.content || '').split(/\n\n+/).filter(p => p.trim()).map((para, idx) => {
                     const pKey = `s${section.id}_p${idx}`
+                    // 수동 업로드 글은 뼈대 줄에 댓글칸을 붙이지 않는다.
+                    const showComments = !(article.source === 'manual' && isStructuralLine(para))
                     return (
                       <div key={pKey} className="paragraph-block">
                         <p className="paragraph-text">{para}</p>
-                        <ParagraphComments
-                          paragraphKey={pKey}
-                          flatComments={commentsByParagraph[pKey] || []}
-                          savedName={savedName}
-                          onSaveName={handleSaveName}
-                          onSubmitComment={handleParagraphCommentSubmit}
-                        />
+                        {showComments && (
+                          <ParagraphComments
+                            paragraphKey={pKey}
+                            flatComments={commentsByParagraph[pKey] || []}
+                            savedName={savedName}
+                            onSaveName={handleSaveName}
+                            onSubmitComment={handleParagraphCommentSubmit}
+                          />
+                        )}
                       </div>
                     )
                   })}

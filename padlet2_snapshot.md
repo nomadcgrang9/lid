@@ -1,0 +1,328 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - link "콘텐츠로 건너뛰기" [ref=e5] [cursor=pointer]:
+      - /url: "#wish-list"
+      - generic [ref=e6]: 콘텐츠로 건너뛰기
+    - main [ref=e7]:
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - navigation:
+            - list:
+              - listitem [ref=e11]:
+                - link "Padlet 로고" [ref=e12] [cursor=pointer]:
+                  - /url: https://padlet.com/dashboard
+                  - img "Padlet 로고" [ref=e13]
+              - listitem [ref=e15]:
+                - list [ref=e16]:
+                  - listitem [ref=e17]:
+                    - generic [ref=e19] [cursor=pointer]:
+                      - img [ref=e22]
+                      - searchbox "키워드로 게시물 검색" [ref=e24]
+                  - listitem [ref=e25]:
+                    - button "슬라이드쇼 열기" [ref=e26] [cursor=pointer]:
+                      - img [ref=e28]
+                      - generic [ref=e30]: 슬라이드쇼 만들기
+                  - listitem [ref=e32]:
+                    - button "공유 패널 열기" [ref=e33] [cursor=pointer]:
+                      - img [ref=e35]
+                      - generic [ref=e37]: 공유
+                  - listitem [ref=e39]:
+                    - list [ref=e40]:
+                      - listitem [ref=e41]:
+                        - button "활동 패널 열기" [ref=e42] [cursor=pointer]:
+                          - img [ref=e44]
+                      - listitem [ref=e48]:
+                        - button "이 게시판 복제" [ref=e49] [cursor=pointer]:
+                          - img [ref=e51]
+                      - listitem [ref=e55]:
+                        - button "Padlet 작업 더보기" [ref=e56] [cursor=pointer]:
+                          - img [ref=e58]
+                  - listitem [ref=e61]:
+                    - link "Padlet에 가입하기" [ref=e62] [cursor=pointer]:
+                      - /url: https://padlet.com/auth/signup?referrer=https%3A%2F%2Fpadlet.com%2Fdodqod%2Fpadlet-qztbf4uh4ne9jwk1
+                      - generic [ref=e63]: Padlet에 가입하기
+                  - listitem [ref=e66]:
+                    - button "가입 페이지로 이동" [ref=e67] [cursor=pointer]:
+                      - img [ref=e68]
+                  - listitem:
+                    - generic:
+                      - img
+                      - button "게시물" [ref=e70] [cursor=pointer]:
+                        - img [ref=e72]
+                        - generic [ref=e74]: 게시물
+          - generic [ref=e75]:
+            - generic [ref=e77]: Padlet 아이콘을 변경할 수 있는 권한 없음
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - link "hg a" [ref=e80] [cursor=pointer]:
+                  - /url: https://padlet.com/dodqod
+                - generic [ref=e81]:
+                  - text: •
+                  - time [ref=e82]: 1시간
+              - heading "나의 별빛 찬란한 Padlet" [level=1] [ref=e83]
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - heading "사례" [level=2] [ref=e90]
+              - generic [ref=e92]:
+                - button "이 섹션에 포스트 추가" [ref=e93] [cursor=pointer]:
+                  - img [ref=e96]
+                - button "섹션 작업 메뉴 열기" [ref=e98] [cursor=pointer]:
+                  - img [ref=e101]
+            - generic [ref=e103]:
+              - article "사례 1문단" [ref=e107]:
+                - generic [ref=e109]:
+                  - generic [ref=e111]:
+                    - generic [ref=e112]:
+                      - generic [ref=e114]:
+                        - link "hg a 프로필로 이동" [ref=e116] [cursor=pointer]:
+                          - /url: https://padlet.com/dodqod
+                          - img "hg a의 아바타" [ref=e117]
+                        - generic [ref=e119]:
+                          - link "hg a 프로필로 이동" [ref=e121] [cursor=pointer]:
+                            - /url: https://padlet.com/dodqod
+                            - text: hg a
+                          - time [ref=e122]: 6시간 전
+                      - heading "사례 1문단" [level=3] [ref=e124]
+                    - paragraph [ref=e125]:
+                      - paragraph [ref=e126]: 아이가 초등학교에 입학한 후 처음으로 열렸던 가을 운동회를 학부모님은 아직도 잊지 못합니다. 쨍한 가을 햇살 아래서 아이들이 땀 흘리며 달리고, 목청껏 응원하던 모습은 한 편의 영화 같았습니다. 그런데 다음 해부터 운동회는 학년별로 시간을 줄여서 하는 ‘미니 체육활동’으로 바뀌었고, 그 다음 해에는 아예 열리지 않았습니다. 아이가 손꼽아 기다리던 현장체험학습도 마찬가지입니다. 1학년 때 놀이공원으로 소풍을 다녀온 것이 마지막이었습니다. 아이는 친구들이 다른 학교는 박물관도 가고 수련회도 간다며 부러워한다고, 우리 학교는 왜 아무 데도 안 가냐고 매일같이 묻습니다. 학부모님은 속상한 마음에 학교에 문의를 해볼까 고민도 했지만, 혹시나 유난스러운 학부모로 보일까 봐 망설여집니다. 교육청에서는 체험학습을 장려한다고 들었는데, 왜 우리 아이 학교는 이렇게 조심스러워하는지 답답한 마음이 드는 것은 어쩔 수 없습니다.
+                  - button "게시물 작업 더보기" [ref=e131] [cursor=pointer]:
+                    - img [ref=e133]
+                  - generic [ref=e136]:
+                    - generic [ref=e137]:
+                      - button "반응 추가" [ref=e142] [cursor=pointer]:
+                        - img [ref=e144]
+                      - button "이 게시물에 댓글 표시" [ref=e153] [cursor=pointer]:
+                        - generic [ref=e154]:
+                          - img [ref=e156]
+                          - generic [ref=e158]: "9"
+                          - generic [ref=e159]: 이 게시물에 댓글 9개 있음
+                    - generic [ref=e160]:
+                      - generic [ref=e162]:
+                        - generic [ref=e163]:
+                          - link [ref=e165] [cursor=pointer]:
+                            - /url: https://padlet.com/dotori010
+                            - img [ref=e166]
+                          - generic [ref=e167]:
+                            - link "김어진 프로필로 이동" [ref=e169] [cursor=pointer]:
+                              - /url: https://padlet.com/dotori010
+                              - text: 김어진
+                            - time [ref=e170]: 2시간 전
+                        - paragraph [ref=e173]: 중고등학교의 사례를 추가하면 좋을 것 같아요.
+                      - generic [ref=e175]:
+                        - generic [ref=e176]:
+                          - img "안형구의 아바타" [ref=e178]
+                          - generic [ref=e179]:
+                            - generic [ref=e181]: 안형구
+                            - time [ref=e182]: 2시간 전
+                        - paragraph [ref=e185]: 학부모의 평균적인 생각이 잘 반영된 것 같다.
+                      - generic [ref=e187]:
+                        - generic [ref=e188]:
+                          - link [ref=e190] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e191]
+                          - generic [ref=e192]:
+                            - link "이창건 프로필로 이동" [ref=e194] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e195]: 2시간 전
+                        - paragraph [ref=e198]: 괜찮음
+                      - generic [ref=e200]:
+                        - generic [ref=e201]:
+                          - link [ref=e203] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e204]
+                          - generic [ref=e205]:
+                            - link "이창건 프로필로 이동" [ref=e207] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e208]: 2시간 전
+                        - paragraph [ref=e211]: 중학교도 안가고 있나요?
+                      - generic [ref=e213]:
+                        - generic [ref=e214]:
+                          - img "안형구의 아바타" [ref=e216]
+                          - generic [ref=e217]:
+                            - generic [ref=e219]: 안형구
+                            - time [ref=e220]: 2시간 전
+                        - paragraph [ref=e223]: 최근 있었던 체험학습비 60만원짜리 사례를 넣자.
+                      - generic [ref=e225]:
+                        - generic [ref=e226]:
+                          - link [ref=e228] [cursor=pointer]:
+                            - /url: https://padlet.com/rosesun90407
+                            - img [ref=e229]
+                          - generic [ref=e230]:
+                            - link "장미선 프로필로 이동" [ref=e232] [cursor=pointer]:
+                              - /url: https://padlet.com/rosesun90407
+                              - text: 장미선
+                            - time [ref=e233]: 2시간 전
+                        - paragraph [ref=e236]: 박물관도 가고 수련회도 간다는 학교는 아닌 학교와 어떤 차이가 있을까요?
+                      - generic [ref=e238]:
+                        - generic [ref=e239]:
+                          - img "안형구의 아바타" [ref=e241]
+                          - generic [ref=e242]:
+                            - generic [ref=e244]: 안형구
+                            - time [ref=e245]: 2시간 전
+                        - paragraph [ref=e248]: 장미선-대답은 학교 선생님들의 생각 차이일 것 같다. 정도가 가능할 것 같은데 이정도는 사실대로 적어도 괜찮을까?
+                      - generic [ref=e250]:
+                        - generic [ref=e251]:
+                          - img "안형구의 아바타" [ref=e253]
+                          - generic [ref=e254]:
+                            - generic [ref=e256]: 안형구
+                            - time [ref=e257]: 2시간 전
+                        - paragraph [ref=e260]: 김어진-학부모가 무리한 요구? 가족여행같은 수준을 요구하고있는데 그것은 무리다. 를 언급
+                      - generic [ref=e262]:
+                        - generic [ref=e263]:
+                          - img "안형구의 아바타" [ref=e265]
+                          - generic [ref=e266]:
+                            - generic [ref=e268]: 안형구
+                            - time [ref=e269]: 2시간 전
+                        - paragraph [ref=e272]: 장미선-현장체험학습을 안가는 학교와 가는 학교의 차이를 설명 할때의 솔직함의 정도? 솔직하게 한다.
+                      - generic [ref=e273]:
+                        - button "댓글에 첨부파일 추가" [ref=e274] [cursor=pointer]:
+                          - img [ref=e277]
+                        - button "댓글 추가" [ref=e282]
+              - article "사례 2문단" [ref=e286]:
+                - generic [ref=e288]:
+                  - generic [ref=e290]:
+                    - generic [ref=e291]:
+                      - generic [ref=e293]:
+                        - link "hg a 프로필로 이동" [ref=e295] [cursor=pointer]:
+                          - /url: https://padlet.com/dodqod
+                          - img "hg a의 아바타" [ref=e296]
+                        - generic [ref=e298]:
+                          - link "hg a 프로필로 이동" [ref=e300] [cursor=pointer]:
+                            - /url: https://padlet.com/dodqod
+                            - text: hg a
+                          - time [ref=e301]: 5시간 전
+                      - heading "사례 2문단" [level=3] [ref=e303]
+                    - paragraph [ref=e304]:
+                      - paragraph [ref=e305]: 한편, 아이의 담임인 A선생님은 10년 전 처음 교직에 발령받았을 때를 떠올립니다. 그때는 5학년 담임을 맡아 한 해에만 놀이동산, 과학체험관, 역사박물관 등 여섯 번이 넘는 체험학습을 다녀왔습니다. 사전 답사를 가고 수많은 서류를 준비하는 과정이 고되기는 했지만, 교실을 벗어나 새로운 것을 보고 배우며 환하게 웃는 아이들의 모습을 보는 것만으로도 큰 보람을 느꼈습니다. 아이들이 행복해하니 체험학습을 계속해야 한다는 것에 어떤 의심도 없었습니다. 하지만 몇 년 전, 동료 교사가 체험학습 중에 발생한 안전사고로 인해 경찰 조사를 받고 재판까지 갔다는 소식을 뉴스에서 접했습니다. 비록 최종적으로는 선고유예 판결을 받았다고 하지만, 그 교사가 겪었을 고통과 불안을 생각하면 남의 일 같지 않았습니다. 언제든 나에게도 닥칠 수 있는 일, ‘내 목까지 칼이 들어올 수 있겠다’는 서늘한 공포감이 온몸을 감쌌습니다.
+                  - button "게시물 작업 더보기" [ref=e310] [cursor=pointer]:
+                    - img [ref=e312]
+                  - generic [ref=e315]:
+                    - generic [ref=e316]:
+                      - button "반응 추가" [ref=e321] [cursor=pointer]:
+                        - img [ref=e323]
+                      - button "이 게시물에 댓글 표시" [ref=e332] [cursor=pointer]:
+                        - generic [ref=e333]:
+                          - img [ref=e335]
+                          - generic [ref=e337]: "4"
+                          - generic [ref=e338]: 이 게시물에 댓글 4개 있음
+                    - generic [ref=e339]:
+                      - generic [ref=e341]:
+                        - generic [ref=e342]:
+                          - img "김훈경의 아바타" [ref=e344]
+                          - generic [ref=e345]:
+                            - generic [ref=e347]: 김훈경
+                            - time [ref=e348]: 2시간 전
+                        - paragraph [ref=e351]: 사전답사를 가고 수많은 서류를 준비하는 과정을 구체적으로 00단계라고 써주면 어떨까요? 학부모들은 이렇게 많은 행정절차가 있는지 모르니까요
+                      - generic [ref=e353]:
+                        - generic [ref=e354]:
+                          - img "안형구의 아바타" [ref=e356]
+                          - generic [ref=e357]:
+                            - generic [ref=e359]: 안형구
+                            - time [ref=e360]: 2시간 전
+                        - paragraph [ref=e363]: 김훈경-구체적 ㅇㅇ단계라고 쓰면 학부모가 관심을 가질까?
+                      - generic [ref=e365]:
+                        - generic [ref=e366]:
+                          - img "김훈경의 아바타" [ref=e368]
+                          - generic [ref=e369]:
+                            - generic [ref=e371]: 김훈경
+                            - time [ref=e372]: 2시간 전
+                        - paragraph [ref=e375]: 교사들이 현장체험학습, 운동회를 준비하기 위해서 얼마나 많은 노력을 하는지 적극적인 홍보도 필요하다고 생각합니다.^^
+                      - generic [ref=e377]:
+                        - generic [ref=e378]:
+                          - img "안형구의 아바타" [ref=e380]
+                          - generic [ref=e381]:
+                            - generic [ref=e383]: 안형구
+                            - time [ref=e384]: 2시간 전
+                        - paragraph [ref=e387]: ㄴ좋은의견
+                      - generic [ref=e388]:
+                        - button "댓글에 첨부파일 추가" [ref=e389] [cursor=pointer]:
+                          - img [ref=e392]
+                        - button "댓글 추가" [ref=e397]
+              - article "사례 3문단" [ref=e401]:
+                - generic [ref=e403]:
+                  - generic [ref=e405]:
+                    - generic [ref=e406]:
+                      - generic [ref=e408]:
+                        - link "hg a 프로필로 이동" [ref=e410] [cursor=pointer]:
+                          - /url: https://padlet.com/dodqod
+                          - img "hg a의 아바타" [ref=e411]
+                        - generic [ref=e413]:
+                          - link "hg a 프로필로 이동" [ref=e415] [cursor=pointer]:
+                            - /url: https://padlet.com/dodqod
+                            - text: hg a
+                          - time [ref=e416]: 5시간 전
+                      - heading "사례 3문단" [level=3] [ref=e418]
+                    - paragraph [ref=e419]:
+                      - paragraph [ref=e420]: 그리고 10년이 흘러 다시 5학년 담임이 된 A선생님은 올해 학교 방침에 따라 현장체험학습을 딱 한 번만 계획해야 한다는 사실에 오히려 안도감을 느낍니다. 학부모님들의 아쉬움과 아이들의 실망감을 모르는 바는 아닙니다. 하지만 단 한 번의 불의의 사고로 한 교사의 인생이 송두리째 흔들릴 수 있다는 현실을 마주한 이상, 예전처럼 체험학습의 교육적 효과만을 생각하며 선뜻 앞장서기란 불가능에 가까워졌습니다. 여기서부터 학부모님과 선생님의 입장 차이가 발생합니다. 학부모님은 아이의 소중한 경험과 추억이 사라지는 것을 안타까워하고, 선생님은 아이들의 안전과 자신의 모든 것을 걸어야 하는 책임의 무게 사이에서 깊은 고민에 빠져 있습니다. 아이들을 위한 마음은 양쪽 모두 같지만, 서로가 처한 현실과 바라보는 지점이 다르기에 보이지 않는 벽이 생기고 마는 것입니다.
+                      - paragraph [ref=e421]
+                  - button "게시물 작업 더보기" [ref=e426] [cursor=pointer]:
+                    - img [ref=e428]
+                  - generic [ref=e431]:
+                    - generic [ref=e432]:
+                      - button "반응 추가" [ref=e437] [cursor=pointer]:
+                        - img [ref=e439]
+                      - button "이 게시물에 댓글 표시" [ref=e448] [cursor=pointer]:
+                        - generic [ref=e449]:
+                          - img [ref=e451]
+                          - generic [ref=e453]: "3"
+                          - generic [ref=e454]: 이 게시물에 댓글 3개 있음
+                    - generic [ref=e455]:
+                      - generic [ref=e457]:
+                        - generic [ref=e458]:
+                          - link [ref=e460] [cursor=pointer]:
+                            - /url: https://padlet.com/l30417305
+                            - img [ref=e461]
+                          - generic [ref=e462]:
+                            - link "이창건 프로필로 이동" [ref=e464] [cursor=pointer]:
+                              - /url: https://padlet.com/l30417305
+                              - text: 이창건
+                            - time [ref=e465]: 2시간 전
+                        - paragraph [ref=e468]: 무난함
+                      - generic [ref=e470]:
+                        - generic [ref=e471]:
+                          - link [ref=e473] [cursor=pointer]:
+                            - /url: https://padlet.com/geige22
+                            - img [ref=e474]
+                          - generic [ref=e475]:
+                            - link "김안나 프로필로 이동" [ref=e477] [cursor=pointer]:
+                              - /url: https://padlet.com/geige22
+                              - text: 김안나
+                            - time [ref=e478]: 2시간 전
+                        - paragraph [ref=e481]: 학부모랑 교사가 대립되는 느낌.. 학부모라고 다 현장체험학습을 찬성하지 않을 것 같고, 교사라고 다 반대하지는 않을 것 같다는 생각. ?!
+                      - generic [ref=e483]:
+                        - generic [ref=e484]:
+                          - img "안형구의 아바타" [ref=e486]
+                          - generic [ref=e487]:
+                            - generic [ref=e489]: 안형구
+                            - time [ref=e490]: 2시간 전
+                        - paragraph [ref=e493]: ㄴ교사도 딜레마가 있다. 케바케가 있다. 대립하는 것 처럼 보일 필요는 없다.
+                      - generic [ref=e494]:
+                        - button "댓글에 첨부파일 추가" [ref=e495] [cursor=pointer]:
+                          - img [ref=e498]
+                        - button "댓글 추가" [ref=e503]
+          - generic [ref=e505]:
+            - heading "관련법령" [level=2] [ref=e509]
+            - generic [ref=e511]:
+              - button "이 섹션에 포스트 추가" [ref=e512] [cursor=pointer]:
+                - img [ref=e515]
+              - button "섹션 작업 메뉴 열기" [ref=e517] [cursor=pointer]:
+                - img [ref=e520]
+          - generic [ref=e527]:
+            - heading "구조적문제" [level=2] [ref=e531]
+            - generic [ref=e533]:
+              - button "이 섹션에 포스트 추가" [ref=e534] [cursor=pointer]:
+                - img [ref=e537]
+              - button "섹션 작업 메뉴 열기" [ref=e539] [cursor=pointer]:
+                - img [ref=e542]
+          - generic [ref=e549]:
+            - heading "대안제시" [level=2] [ref=e553]
+            - generic [ref=e555]:
+              - button "이 섹션에 포스트 추가" [ref=e556] [cursor=pointer]:
+                - img [ref=e559]
+              - button "섹션 작업 메뉴 열기" [ref=e561] [cursor=pointer]:
+                - img [ref=e564]
+    - complementary "AI 채팅 패널"
+  - status

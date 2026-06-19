@@ -10,7 +10,8 @@ import {
   query,
   orderBy,
   serverTimestamp,
-  where
+  where,
+  onSnapshot
 } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { db, storage } from '../firebase/config'
@@ -358,6 +359,30 @@ export async function getComments(articleId) {
     console.error('댓글 조회 오류:', error)
     throw error
   }
+}
+
+// 댓글 실시간 구독 (onSnapshot)
+export function subscribeComments(articleId, callback, onError) {
+  const q = query(
+    collection(db, COMMENTS_COLLECTION),
+    where('articleId', '==', articleId),
+    orderBy('createdAt', 'asc')
+  )
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const comments = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        createdAt: doc.data().createdAt?.toDate?.() || new Date()
+      }))
+      callback(comments)
+    },
+    (error) => {
+      console.error('댓글 실시간 구독 오류:', error)
+      if (onError) onError(error)
+    }
+  )
 }
 
 // 댓글 추가

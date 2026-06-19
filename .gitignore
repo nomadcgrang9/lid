@@ -44,6 +44,9 @@ hwpx-template/
 # Claude
 .claude/
 
+# Playwright MCP 캡처/세션 산출물 (커밋 제외)
+.playwright-mcp/
+
 # Build logs and temp output
 build_log.txt
 build_output.txt
